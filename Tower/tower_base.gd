@@ -41,8 +41,8 @@ func get_best_target() -> Node2D:
 	if all_targets.is_empty():
 		return null
 	all_targets.sort_custom(func(a, b):
-		if a.loudness != b.loudness:
-			return a.loudness > b.loudness
+		if a.stats.loudness != b.stats.loudness:
+			return a.stats.loudness > b.stats.loudness
 		return a.get_parent().progress > b.get_parent().progress
 	)
 	

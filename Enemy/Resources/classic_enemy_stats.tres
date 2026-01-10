@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d0ihk500un1ua" path="res://Enemy/Resources/enemy_resource_base.gd" id="1_81fa6"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_81fa6")
 description = "Zwykły przeciwnik, nic nie robi tylko idzie"
 metadata/_custom_type_script = "uid://d0ihk500un1ua"
