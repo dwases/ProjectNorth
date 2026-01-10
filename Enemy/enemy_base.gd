@@ -16,7 +16,7 @@ func initiate(s: float, sd: float, l: int, _hp: float) -> void:
 	loudness = l
 	hp = _hp
 	var circle = NoiseCollider.shape as CircleShape2D
-	circle.radius = loudness * 100
+	circle.radius = l * 100
 	
 func make_noise() -> void:
 	if noise_area.has_overlapping_bodies():
