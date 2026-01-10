@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_pmvg8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 250, 450, 0, 0, 0, 0, 790, 600)
+"points": PackedVector2Array(0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 100, 500, 0, 0, 0, 0, 1000, 500, 0, 0, 0, 0, 1000, 100, 0, 0, 0, 0, 500, 100, 0, 0, 0, 0, 579, 508)
 }
-point_count = 3
+point_count = 6
 
 [node name="MainMap1" type="Node2D"]
 
@@ -14,7 +14,5 @@ point_count = 3
 curve = SubResource("Curve2D_pmvg8")
 
 [node name="enemybuffer" parent="Path2D" instance=ExtResource("1_m88kv")]
-position = Vector2(50, 50)
-rotation = 1.1071488
-speed = 30.0
-step_distance = 15.0
+position = Vector2(100, 100)
+rotation = 1.5707964

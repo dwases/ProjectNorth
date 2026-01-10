@@ -5,10 +5,13 @@ extends PathFollow2D
 @export var hp: int = 100
 @export var footsprite: PackedScene
 
-@onready var enemy: CharacterBody2D = $Enemy
+@onready var enemy: Enemy_Class = $Enemy
 
 var distance_progress: float = 0
 var foot_flag: bool = false
+
+func _ready():
+	enemy.initiate(speed,step_distance,loudness,hp)
 
 func _physics_process(delta: float) -> void:
 	progress += speed * delta
@@ -17,17 +20,20 @@ func _physics_process(delta: float) -> void:
 	if distance_progress >= step_distance:
 		distance_progress = 0
 		spawn_footstep()
+		enemy.make_noise()
 		
 func spawn_footstep():
 	var fs = footsprite.instantiate() as AnimatedSprite2D
 	get_tree().current_scene.add_child(fs)
+	fs.global_position = enemy.global_position
+	fs.global_rotation = enemy.global_rotation + deg_to_rad(90)
 	if foot_flag:
 		fs.play("right")
 		foot_flag = false
+		fs.global_position = to_global(Vector2(0,25))
 	else:
 		fs.play("left")
 		foot_flag = true
-	fs.global_position = enemy.global_position
-	fs.global_rotation = enemy.global_rotation + 90
+		fs.global_position = to_global(Vector2(0,-25))
 	
 	
