@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=12 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="PackedScene" uid="uid://b102jg1fi1ib0" path="res://Tower/tower_base.tscn" id="2_8royk"]
 [ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower_stats.tres" id="3_5jfwi"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
+[ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="7_3wr7y"]
+[ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="8_tmima"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
