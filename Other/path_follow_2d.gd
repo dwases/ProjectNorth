@@ -1,4 +1,6 @@
 extends PathFollow2D
+class_name Enemy_Buffer
+
 @export var speed: float = 500.0
 @export var step_distance: float = 250.0
 @export var loudness: int = 10
@@ -6,21 +8,22 @@ extends PathFollow2D
 @export var footsprite: PackedScene
 
 @onready var enemy: Enemy_Class = $Enemy
+@export var stats: EnemyStats
 
 var distance_progress: float = 0
 var foot_flag: bool = false
 
 func _ready():
-	enemy.initiate()
+	enemy.initiate(stats)
 
 func _physics_process(delta: float) -> void:
 	if progress_ratio == 1:
 		GameInstance.damage_player(1)
 		self.queue_free()
-	progress += speed * delta
-	distance_progress += speed * delta
+	progress += stats.speed * delta
+	distance_progress += stats.speed * delta
 	
-	if distance_progress >= step_distance:
+	if distance_progress >= stats.stepDistance:
 		distance_progress = 0
 		spawn_footstep()
 		enemy.make_noise()

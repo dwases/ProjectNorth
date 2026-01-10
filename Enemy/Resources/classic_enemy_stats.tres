@@ -5,5 +5,8 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_81fa6")
+loudness = 3
+speed = 100.0
+stepDistance = 75.0
 description = "Zwykły przeciwnik, nic nie robi tylko idzie"
 metadata/_custom_type_script = "uid://d0ihk500un1ua"

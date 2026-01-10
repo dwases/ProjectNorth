@@ -10,9 +10,8 @@ metadata/_custom_type_script = "uid://6rcu3wyrh30q"
 [resource]
 script = ExtResource("1_l4n3v")
 HP = 150
-loudness = 8
-speed = 450.0
-stepDistance = 150.0
+loudness = 4
+speed = 300.0
 ability = SubResource("Resource_bv205")
 description = "Może wchodzić w interakcje z obiektami na mapie, np. uszkodzić samochów żeby wywołać alarm"
 metadata/_custom_type_script = "uid://d0ihk500un1ua"

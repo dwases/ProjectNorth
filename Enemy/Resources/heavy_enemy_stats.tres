@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_aov0r")
 HP = 200
-loudness = 15
-speed = 300.0
-stepDistance = 300.0
+loudness = 6
+speed = 90.0
+stepDistance = 90.0
 description = "Zwykły przeciwnik, ale zjadł więcej burgerów"
 metadata/_custom_type_script = "uid://d0ihk500un1ua"

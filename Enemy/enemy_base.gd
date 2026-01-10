@@ -7,7 +7,8 @@ class_name Enemy_Class
 @onready var noise_area: Area2D = $NoiseArea
 
 
-func initiate() -> void:
+func initiate(_stats: EnemyStats) -> void:
+	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
 	circle.radius = stats.loudness * 100
 	
@@ -20,6 +21,7 @@ func make_noise() -> void:
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
 	if stats.HP <= 0:
+		get_tree().current_scene.enemyAlive -= 1
 		get_parent().queue_free()
 	
 	
