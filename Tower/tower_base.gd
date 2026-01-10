@@ -132,9 +132,11 @@ func _on_destroy_button_pressed() -> void:
 func upgrade():
 	if stats.level < stats.upgrades.add_cost.size():
 		var upgrade_data = stats.upgrades
+		stats.BaseCost += upgrade_data.add_cost[stats.level-1]
 		stats.Attack_speed += upgrade_data.add_attack_speed[stats.level-1]
 		stats.Damage += upgrade_data.add_damage[stats.level-1]
 		stats.Zasieg += upgrade_data.add_range[stats.level-1]
+		stats.sell_cost = floor(stats.BaseCost/2)
 		stats.level += 1
 		print("Ulepszono na poziom: ", stats.level)
 	else:
