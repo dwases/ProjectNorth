@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_x1q78")
-add_cost = Array[int]([100, 200, 300])
+add_cost = Array[int]([100, 200, 300, 400, 500, 600])
 add_damage = Array[float]([5.0, 5.0, 5.0, 10.0, 10.0, 10.0])
 add_range = Array[int]([0, 0, 0, 0, 0, 0])
 add_attack_speed = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
