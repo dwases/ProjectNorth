@@ -17,6 +17,7 @@ var heavyStats = preload("res://Enemy/Resources/heavy_enemy_stats.tres")
 var majorStats = preload("res://Enemy/Resources/major_enemy_stats.tres")
 var vandalStats = preload("res://Enemy/Resources/vandal_enemy_stats.tres")
 var enemyAlive: int = 0
+var playerMoney: int = 100
 
 @onready var timer_spawn: Timer = $TimerSpawn
 
