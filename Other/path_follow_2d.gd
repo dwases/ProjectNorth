@@ -16,7 +16,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if progress_ratio == 1:
 		GameInstance.damage_player(1)
-		get_parent().queue_free()
+		self.queue_free()
 	progress += speed * delta
 	distance_progress += speed * delta
 	
@@ -33,10 +33,10 @@ func spawn_footstep():
 	if foot_flag:
 		fs.play("right")
 		foot_flag = false
-		fs.global_position = to_global(Vector2(0,25))
+		fs.global_position = to_global(Vector2(0,10))
 	else:
 		fs.play("left")
 		foot_flag = true
-		fs.global_position = to_global(Vector2(0,-25))
+		fs.global_position = to_global(Vector2(0,-10))
 	
 	

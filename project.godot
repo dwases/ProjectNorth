@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 GameInstance="*res://Other/gi_gameinstance.gd"
 
+[display]
+
+window/size/mode=3
+window/stretch/mode="viewport"
+
 [layer_names]
 
 2d_physics/layer_1="Tower"

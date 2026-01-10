@@ -6,8 +6,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_qupb6"]
 radius = 60.133186
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7h4yf"]
-radius = 290.0276
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kxy1"]
+resource_local_to_scene = true
+radius = 132.96616
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -21,7 +22,7 @@ shape = SubResource("CircleShape2D_qupb6")
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoiseArea"]
-shape = SubResource("CircleShape2D_7h4yf")
+shape = SubResource("CircleShape2D_0kxy1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
