@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=3 format=3 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="PackedScene" uid="uid://b3i4vhql8gbtm" path="res://Other/enemy_buffer.tscn" id="1_m88kv"]
-[ext_resource type="PackedScene" uid="uid://bw136vx5xwrhe" path="res://Other/foot_sprite_animation.tscn" id="2_8royk"]
 
 [sub_resource type="Curve2D" id="Curve2D_pmvg8"]
 _data = {
@@ -16,9 +15,6 @@ curve = SubResource("Curve2D_pmvg8")
 
 [node name="enemybuffer" parent="Path2D" instance=ExtResource("1_m88kv")]
 position = Vector2(50, 50)
-
-[node name="enemybuffer2" parent="Path2D" instance=ExtResource("1_m88kv")]
-position = Vector2(50, 50)
-speed = 300.0
-step_distance = 300.0
-footsprite = ExtResource("2_8royk")
+rotation = 1.1071488
+speed = 30.0
+step_distance = 15.0
