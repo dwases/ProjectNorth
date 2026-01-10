@@ -3,7 +3,7 @@ class_name TowerStats
 
 @export_group("Visuals")
 @export var tower_texture: Texture2D
-@export var projectile_visual: PackedScene
+@export var projectile_visual: Texture2D
 
 @export_group("Combat Stats")
 @export var Zasieg: int = 300
