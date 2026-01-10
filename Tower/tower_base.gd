@@ -2,7 +2,41 @@ extends StaticBody2D
 class_name Tower
 
 @export var stats: TowerStats
+
+@onready var menu = $TowerMenu
+@onready var range_circle = $TowerMenu/RangeCircle
+@onready var btn_upgrade = $TowerMenu/UpgradeButton
+@onready var btn_sell = $TowerMenu/DestroyButton
+
 var targets_in_range: Array[Node2D] = []
+
+func _ready():
+	# Ukrywamy menu na start
+	menu.visible = false
+	
+	# Podłączamy sygnały przycisków
+	btn_upgrade.pressed.connect(_on_upgrade_button_pressed)
+	btn_sell.pressed.connect(_on_destroy_button_pressed)
+	
+	# Inicjalizujemy kółko zasięgu (jeśli statystyki są załadowane)
+	if stats:
+		range_circle.update_circle(stats.Zasieg)
+
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		toggle_menu()
+func toggle_menu():
+	menu.visible = not menu.visible
+	
+	if menu.visible:
+		# Jeśli otwieramy menu, warto odświeżyć promień (np. po upgrade)
+		range_circle.update_circle(stats.Zasieg)
+		
+		# Pro Tip: Tu możesz wysłać sygnał do "GameManagera", 
+		# żeby zamknął menu innych wież (żeby nie mieć otwartych 10 na raz).
+		add_to_group("selected_towers")
+	else:
+		remove_from_group("selected_towers")
 
 func get_best_target() -> Node2D:
 	var all_targets = get_all_targets()
@@ -11,7 +45,7 @@ func get_best_target() -> Node2D:
 	all_targets.sort_custom(func(a, b):
 		if a.loudness != b.loudness:
 			return a.loudness > b.loudness
-		return a.progress > b.progress
+		return a.get_parent().progress > b.get_parent().progress
 	)
 	
 	return all_targets[0]
@@ -82,3 +116,13 @@ func get_all_targets() -> Array:
 			combined_targets.append(enemy)
 			
 	return combined_targets
+
+
+func _on_upgrade_button_pressed() -> void:
+	print("Kliknięto Upgrade!")
+	range_circle.update_circle(stats.Zasieg)
+
+
+func _on_destroy_button_pressed() -> void:
+	print("Sprzedano wieżę")
+	queue_free()
