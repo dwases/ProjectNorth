@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://bwcwtgj328meo"]
+
+[ext_resource type="Script" uid="uid://d0ihk500un1ua" path="res://Enemy/Resources/enemy_resource_base.gd" id="1_ay38e"]
+[ext_resource type="Script" uid="uid://6rcu3wyrh30q" path="res://Enemy/Abilities/enemy_ability.gd" id="1_xgne2"]
+
+[sub_resource type="Resource" id="Resource_2s5cl"]
+script = ExtResource("1_xgne2")
+metadata/_custom_type_script = "uid://6rcu3wyrh30q"
+
+[resource]
+script = ExtResource("1_ay38e")
+HP = 400
+loudness = 12
+speed = 300.0
+stepDistance = 300.0
+ability = SubResource("Resource_2s5cl")
+description = "Raz na długi czas rzuca wabik w zasięgu 2000 do przodu na ścieżce"
+metadata/_custom_type_script = "uid://d0ihk500un1ua"
