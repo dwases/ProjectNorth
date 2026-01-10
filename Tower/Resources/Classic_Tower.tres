@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="TowerStats" load_steps=2 format=3 uid="uid://dxk7ua01m4piq"]
+[gd_resource type="Resource" script_class="TowerStats" load_steps=5 format=3 uid="uid://dxk7ua01m4piq"]
 
+[ext_resource type="PackedScene" uid="uid://ch75basp6e45b" path="res://Enemy/enemy_base.tscn" id="1_5if8r"]
 [ext_resource type="Script" uid="uid://cn784oipgohx" path="res://Tower/Resources/Tower_Resource_base.gd" id="1_hqwc2"]
+[ext_resource type="Script" uid="uid://w0ayw63ir38y" path="res://Tower/Effects/tower_effect.gd" id="3_1g4hb"]
+
+[sub_resource type="Resource" id="Resource_5if8r"]
+script = ExtResource("3_1g4hb")
+metadata/_custom_type_script = "uid://w0ayw63ir38y"
 
 [resource]
 script = ExtResource("1_hqwc2")
+projectile_visual = ExtResource("1_5if8r")
 Zasieg = 500
 Attack_speed = 2.0
 Damage = 30.0
-BaseCost = 100
+tower_effect = SubResource("Resource_5if8r")
 metadata/_custom_type_script = "uid://cn784oipgohx"
