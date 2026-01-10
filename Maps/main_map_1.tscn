@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=12 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
 [ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="5_u6cf2"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="6_u6cf2"]
+[ext_resource type="Shader" uid="uid://dqy6lj8i8c5yy" path="res://Shaders/RadialBlur.gdshader" id="7_3wr7y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -100,6 +101,14 @@ _data = {
 }
 point_count = 19
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3wr7y"]
+resource_local_to_scene = true
+shader = ExtResource("7_3wr7y")
+shader_parameter/intensity = 0.310000014725
+shader_parameter/falloff = 0.5
+shader_parameter/samples = 16
+shader_parameter/center = Vector2(0.5, 0.5)
+
 [node name="MainMap1" type="Node2D"]
 script = ExtResource("1_3wr7y")
 
@@ -118,6 +127,22 @@ curve = SubResource("Curve2D_pmvg8")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.3449418, 0.47932833, 0.72724265, 1)
 
+[node name="VignetteRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3wr7y")
+offset_left = -823.0
+offset_top = -478.0
+offset_right = 835.0
+offset_bottom = 482.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorBlurRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3wr7y")
+offset_left = -823.0
+offset_top = -478.0
+offset_right = 835.0
+offset_bottom = 482.0
+color = Color(0, 0, 0, 1)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FullScreen" type="Control" parent="CanvasLayer"]
@@ -127,6 +152,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("5_u6cf2")
 
 [node name="ShopWrapper" type="Control" parent="CanvasLayer/FullScreen"]

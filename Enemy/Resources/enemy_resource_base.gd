@@ -10,6 +10,7 @@ class_name EnemyStats
 @export var loudness: int = 10
 @export var speed: float = 500
 @export var stepDistance: float = 250
+@export var money: int = 50
 
 @export_group("Special abilities")
 @export var ability: EnemyAbility = null

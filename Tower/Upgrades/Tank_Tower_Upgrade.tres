@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerUpgrade" load_steps=2 format=3 uid="uid://cvdhov7k07yxs"]
+
+[ext_resource type="Script" uid="uid://dlafdnkchlgap" path="res://Tower/Upgrades/Upgrades_Resource_base.gd" id="1_ocqqi"]
+
+[resource]
+script = ExtResource("1_ocqqi")
+add_cost = Array[int]([800, 1600, 2400, 3200, 4000, 4800])
+add_damage = Array[float]([5.0, 5.0, 5.0, 10.0, 10.0, 10.0])
+add_range = Array[int]([0, 0, 0, 0, 0, 0])
+add_attack_speed = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+metadata/_custom_type_script = "uid://dlafdnkchlgap"

@@ -17,6 +17,7 @@ var heavyStats = preload("res://Enemy/Resources/heavy_enemy_stats.tres")
 var majorStats = preload("res://Enemy/Resources/major_enemy_stats.tres")
 var vandalStats = preload("res://Enemy/Resources/vandal_enemy_stats.tres")
 var enemyAlive: int = 0
+var playerMoney: int = 100
 
 @onready var timer_spawn: Timer = $TimerSpawn
 
@@ -24,15 +25,14 @@ func _ready() -> void:
 	if game_ui:
 		game_ui.start_wave_requested.connect(_on_ui_request_wave)
 func _on_ui_request_wave():
-	# Zabezpieczenie: nie startuj nowej fali, jak stara trwa
-	if isWaveActive:
-		return
-	start_wave(wave)
+	start_wave()
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	var e := enemyScene.instantiate() as Enemy_Buffer
 	e.stats = base_stats.duplicate(true) as EnemyStats
 	return e
-
+func _process(delta):
+	if enemyAlive<=0 && isWaveActive:
+		wave_end()
 func _spawn_wave(pattern: Array[EnemyStats]) -> void:
 	for stats in pattern:
 		var e := _spawn_enemy(stats)
@@ -42,9 +42,8 @@ func _spawn_wave(pattern: Array[EnemyStats]) -> void:
 		path_2d.add_child(e)
 		enemyAlive += 1
 
-func start_wave(_wave: int) -> void:
-	wave += 1
-	match _wave:
+func start_wave() -> void:
+	match wave:
 		1:
 			var pattern := [
 				classicStats,
@@ -53,6 +52,7 @@ func start_wave(_wave: int) -> void:
 				heavyStats,
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
+			isWaveActive = true
 
 		2:
 			var pattern := [
@@ -63,6 +63,7 @@ func start_wave(_wave: int) -> void:
 				classicStats,
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
+			isWaveActive = true
 
 		3:
 			var pattern := [
@@ -73,10 +74,13 @@ func start_wave(_wave: int) -> void:
 				classicStats,
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
-
+			isWaveActive = true
 		_:
-			pass
+			wave-=1
+			wave_end()
 	print("Sprawdzam Await")
 
 func wave_end():
+	wave+=1
 	game_ui.wave_end()
+	isWaveActive = false
