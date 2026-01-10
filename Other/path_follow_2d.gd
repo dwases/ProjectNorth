@@ -1,7 +1,7 @@
 extends PathFollow2D
 class_name Enemy_Buffer
 
-@export var speed: float = 500.0
+@export var speed: float
 @export var step_distance: float = 250.0
 @export var loudness: int = 10
 @export var hp: float = 100
@@ -19,6 +19,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if progress_ratio == 1:
 		GameInstance.damage_player(1)
+		get_tree().current_scene.enemyAlive -= 1
 		self.queue_free()
 	progress += stats.speed * delta
 	distance_progress += stats.speed * delta
