@@ -55,6 +55,7 @@ func HideUI():
 	
 
 func _on_start_wave_pressed() -> void:
-	start_wave_requested.emit()
 	HideUI()
+	start_wave_requested.emit()
+	
 	

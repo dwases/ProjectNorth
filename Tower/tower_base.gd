@@ -22,6 +22,7 @@ func _ready():
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		toggle_menu()
+		print("test")
 func toggle_menu():
 	menu.visible = not menu.visible
 	
