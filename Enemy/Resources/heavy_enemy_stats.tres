@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_aov0r")
-HP = 200
 loudness = 6
 speed = 90.0
 stepDistance = 90.0
