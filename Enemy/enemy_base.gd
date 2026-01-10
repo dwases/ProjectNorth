@@ -10,7 +10,8 @@ var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
 
-func initiate() -> void:
+func initiate(_stats) -> void:
+	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
 	circle.radius = stats.loudness * 100
 	
