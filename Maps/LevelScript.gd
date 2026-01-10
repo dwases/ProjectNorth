@@ -2,7 +2,8 @@ extends Node2D
 
 
 @onready var path_2d: Path2D = $Path2D
-
+@onready var game_ui = $CanvasLayer/FullScreen
+var isWaveActive: bool = false
 #wyłącza UI włączonych menu towerów jeżeli nie klikniesz w nic użytecznego
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -15,14 +16,18 @@ var classicStats = preload("res://Enemy/Resources/classic_enemy_stats.tres")
 var heavyStats = preload("res://Enemy/Resources/heavy_enemy_stats.tres")
 var majorStats = preload("res://Enemy/Resources/major_enemy_stats.tres")
 var vandalStats = preload("res://Enemy/Resources/vandal_enemy_stats.tres")
-
 var enemyAlive: int = 0
 
 @onready var timer_spawn: Timer = $TimerSpawn
 
 func _ready() -> void:
+	if game_ui:
+		game_ui.start_wave_requested.connect(_on_ui_request_wave)
+func _on_ui_request_wave():
+	# Zabezpieczenie: nie startuj nowej fali, jak stara trwa
+	if isWaveActive:
+		return
 	start_wave(wave)
-
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	var e := enemyScene.instantiate() as Enemy_Buffer
 	e.stats = base_stats.duplicate(true) as EnemyStats
@@ -72,3 +77,6 @@ func start_wave(_wave: int) -> void:
 		_:
 			pass
 	print("Sprawdzam Await")
+
+func wave_end():
+	game_ui.wave_end()
