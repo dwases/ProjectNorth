@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TowerStats" load_steps=7 format=3 uid="uid://c2y1o4hw5vg8x"]
+
+[ext_resource type="Texture2D" uid="uid://bbfcvhw3fy1ko" path="res://Tower/sprites/bullet.png" id="1_jxb5v"]
+[ext_resource type="Script" uid="uid://cn784oipgohx" path="res://Tower/Tower_Resource_base.gd" id="2_ltqod"]
+[ext_resource type="Script" uid="uid://w0ayw63ir38y" path="res://Tower/Effects/tower_effect.gd" id="3_2xgmb"]
+[ext_resource type="Resource" uid="uid://c8kxr7f8m085" path="res://Tower/Upgrades/Classic_Tower_Upgrade.tres" id="4_4u12s"]
+[ext_resource type="Texture2D" uid="uid://bnn6rnj8w5ptt" path="res://Tower/sprites/sniperTurret.png" id="4_ltqod"]
+
+[sub_resource type="Resource" id="Resource_5if8r"]
+script = ExtResource("3_2xgmb")
+metadata/_custom_type_script = "uid://w0ayw63ir38y"
+
+[resource]
+script = ExtResource("2_ltqod")
+tower_texture = ExtResource("4_ltqod")
+projectile_visual = ExtResource("1_jxb5v")
+Zasieg = 500
+Attack_speed = 2.0
+Damage = 30.0
+upgrades = ExtResource("4_4u12s")
+tower_effect = SubResource("Resource_5if8r")
+metadata/_custom_type_script = "uid://cn784oipgohx"

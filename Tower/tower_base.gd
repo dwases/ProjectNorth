@@ -2,7 +2,6 @@ extends StaticBody2D
 class_name Tower
 
 @export var stats: TowerStats
-
 @onready var menu = $TowerMenu
 @onready var range_circle = $TowerMenu/RangeCircle
 @onready var btn_upgrade = $TowerMenu/RangeCircle/VBoxContainer/UpgradeButton
@@ -14,7 +13,7 @@ var targets_in_range: Array[Node2D] = []
 func _ready():
 	# Ukrywamy menu na start
 	menu.visible = false
-	
+	barrel.texture = stats.tower_texture
 	
 	# Inicjalizujemy kółko zasięgu (jeśli statystyki są załadowane)
 	if stats:
@@ -130,14 +129,16 @@ func _on_destroy_button_pressed() -> void:
 	print("Sprzedano wieżę")
 	queue_free()
 func upgrade():
-	if stats.level < stats.upgrades.add_cost.size():
+	if stats.level <= stats.upgrades.add_cost.size():
 		var upgrade_data = stats.upgrades
 		stats.BaseCost += upgrade_data.add_cost[stats.level-1]
 		stats.Attack_speed += upgrade_data.add_attack_speed[stats.level-1]
 		stats.Damage += upgrade_data.add_damage[stats.level-1]
 		stats.Zasieg += upgrade_data.add_range[stats.level-1]
-		stats.sell_cost = floor(stats.BaseCost/2)
+		stats.sell_cost += floor(upgrade_data.add_cost[stats.level-1]/2)
 		stats.level += 1
 		print("Ulepszono na poziom: ", stats.level)
+		if stats.level > stats.upgrades.add_cost.size():
+			stats.BaseCost = 0
 	else:
 		print("Maksymalny poziom osiągnięty!")

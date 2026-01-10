@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=12 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="PackedScene" uid="uid://b3i4vhql8gbtm" path="res://Other/enemy_buffer.tscn" id="1_m88kv"]
 [ext_resource type="PackedScene" uid="uid://b102jg1fi1ib0" path="res://Tower/tower_base.tscn" id="2_8royk"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://3ndd62mvay5r" path="res://Other/foot_sprite_animation2.tscn" id="3_u6cf2"]
 [ext_resource type="PackedScene" uid="uid://b5cam4egsgegn" path="res://Other/foot_sprite_animation3.tscn" id="4_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
+[ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="7_3wr7y"]
+[ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="8_tmima"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -124,3 +126,53 @@ footsprite = ExtResource("4_3wr7y")
 [node name="Tower" parent="." instance=ExtResource("2_8royk")]
 position = Vector2(-84, 143)
 stats = ExtResource("3_5jfwi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FullScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_3wr7y")
+
+[node name="ShopWrapper" type="Control" parent="CanvasLayer/FullScreen"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FullScreen/ShopWrapper"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ToggleButton2" type="Button" parent="CanvasLayer/FullScreen/ShopWrapper"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="StartWaveButton" type="Button" parent="CanvasLayer/FullScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+icon = ExtResource("8_tmima")
