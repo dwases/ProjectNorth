@@ -1,14 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://b102jg1fi1ib0"]
+[gd_scene load_steps=8 format=3 uid="uid://b102jg1fi1ib0"]
 
 [ext_resource type="Script" uid="uid://gm3q7xkl81ho" path="res://Tower/tower_base.gd" id="1_88ecy"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="2_7yp31"]
+[ext_resource type="Script" uid="uid://vp7jx4ic4o8h" path="res://Tower/DrawCircle.gd" id="3_hut86"]
+[ext_resource type="Texture2D" uid="uid://bujvcqkl1ifek" path="res://Pictures/road1.png" id="4_wl0mc"]
+[ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="5_qpemc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnvo1"]
+radius = 62.201286
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b4b5t"]
 
 [node name="Tower" type="StaticBody2D"]
 collision_mask = 0
+input_pickable = true
 script = ExtResource("1_88ecy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,4 +31,33 @@ shape = SubResource("CircleShape2D_b4b5t")
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="TowerMenu" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="RangeCircle" type="Node2D" parent="TowerMenu"]
+script = ExtResource("3_hut86")
+
+[node name="UpgradeButton" type="TextureButton" parent="TowerMenu"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -141.0
+offset_right = 21.0
+offset_bottom = -101.0
+texture_normal = ExtResource("4_wl0mc")
+
+[node name="DestroyButton" type="TextureButton" parent="TowerMenu"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 98.0
+offset_right = 20.0
+offset_bottom = 138.0
+texture_normal = ExtResource("5_qpemc")
+
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="pressed" from="TowerMenu/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="TowerMenu/DestroyButton" to="." method="_on_destroy_button_pressed"]

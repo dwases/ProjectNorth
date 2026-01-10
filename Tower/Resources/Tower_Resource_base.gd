@@ -12,7 +12,7 @@ class_name TowerStats
 
 @export_group("Economy")
 @export var BaseCost: int = 100
-@export var upgrade_cost: Array[int] = [150, 300, 500]
+@export var upgrades: Array[TowerUpgrade]
 
 @export_group("Special Logic")
 @export var tower_effect: TowerEffect = null
