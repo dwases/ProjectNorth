@@ -7,6 +7,7 @@ class_name Tower
 @onready var range_circle = $TowerMenu/RangeCircle
 @onready var btn_upgrade = $TowerMenu/RangeCircle/VBoxContainer/UpgradeButton
 @onready var btn_sell = $TowerMenu/RangeCircle/VBoxContainer2/DestroyButton
+@onready var barrel: Sprite2D = $Barrel
 
 var targets_in_range: Array[Node2D] = []
 
@@ -60,7 +61,8 @@ func shoot(target: Node2D):
 	$ReloadTimer.start()
 
 func spawn_visual_projectile(target: Node2D):
-	var visuals = stats.projectile_visual.instantiate()
+	var visuals = Sprite2D.new()
+	visuals.texture = stats.projectile_visual
 	get_tree().current_scene.add_child(visuals)
 	
 	visuals.global_position = global_position
@@ -104,6 +106,10 @@ func _process(delta):
 			
 		if current_time >= heard_enemies_timers[enemy]:
 			heard_enemies_timers.erase(enemy)
+		
+	if get_all_targets().size() > 0:
+		barrel.look_at(get_best_target().global_position)
+		barrel.global_rotation_degrees += 45
 
 func get_all_targets() -> Array:
 	var combined_targets = []
