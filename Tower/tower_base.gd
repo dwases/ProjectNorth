@@ -129,6 +129,7 @@ func _on_upgrade_button_pressed() -> void:
 func _on_destroy_button_pressed() -> void:
 	print("Sprzedano wieżę")
 	queue_free()
+
 func upgrade():
 	if stats.level <= stats.upgrades.add_cost.size():
 		var upgrade_data = stats.upgrades
