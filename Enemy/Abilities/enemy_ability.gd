@@ -1,5 +1,5 @@
 extends Resource
 class_name EnemyAbility
 
-func activate_ability():
+func initialize_ability():
 	pass

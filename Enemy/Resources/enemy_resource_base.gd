@@ -6,7 +6,7 @@ class_name EnemyStats
 @export var footstepID: int = 0
 
 @export_group("Stats")
-@export var HP: int = 100
+@export var HP: float = 100
 @export var loudness: int = 10
 @export var speed: float = 500
 @export var stepDistance: float = 250

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://x7pjlrnv4yfp"]
+
+[ext_resource type="Script" uid="uid://cb15er7s6jyds" path="res://Maps/Ineractables/noisy_car.gd" id="1_5hs4n"]
+[ext_resource type="Texture2D" uid="uid://b60y31grhrfiu" path="res://Maps/Ineractables/sprites/InteractableCar.png" id="1_hevgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hs4n"]
+size = Vector2(37, 20)
+
+[node name="NoisyCar" type="Node"]
+script = ExtResource("1_5hs4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hevgb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_5hs4n")
