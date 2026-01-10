@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerStats" load_steps=2 format=3 uid="uid://dxk7ua01m4piq"]
+
+[ext_resource type="Script" uid="uid://cn784oipgohx" path="res://Tower/Resources/Tower_Resource_base.gd" id="1_hqwc2"]
+
+[resource]
+script = ExtResource("1_hqwc2")
+Zasieg = 500
+Attack_speed = 2.0
+Damage = 30.0
+BaseCost = 100
+metadata/_custom_type_script = "uid://cn784oipgohx"

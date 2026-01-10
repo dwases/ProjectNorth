@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b102jg1fi1ib0"]
+[gd_scene load_steps=4 format=3 uid="uid://b102jg1fi1ib0"]
+
+[ext_resource type="Script" uid="uid://gm3q7xkl81ho" path="res://Tower/tower_base.gd" id="1_88ecy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnvo1"]
 
@@ -6,6 +8,7 @@
 
 [node name="Tower" type="StaticBody2D"]
 collision_mask = 0
+script = ExtResource("1_88ecy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wnvo1")
@@ -17,3 +20,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlotDetector"]
 shape = SubResource("CircleShape2D_b4b5t")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
