@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b102jg1fi1ib0"]
+[gd_scene load_steps=8 format=3 uid="uid://b102jg1fi1ib0"]
 
 [ext_resource type="Script" uid="uid://gm3q7xkl81ho" path="res://Tower/tower_base.gd" id="1_88ecy"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="2_7yp31"]
-[ext_resource type="Texture2D" uid="uid://b2brckc71ni7r" path="res://Tower/sprites/basicTurret.png" id="3_3yu0v"]
 [ext_resource type="Script" uid="uid://vp7jx4ic4o8h" path="res://Tower/DrawCircle.gd" id="3_hut86"]
 [ext_resource type="Texture2D" uid="uid://br1pggqdpgtwe" path="res://Pictures/icons/upgradeIcon.png" id="4_qpemc"]
 [ext_resource type="Texture2D" uid="uid://8amfpqqboe2t" path="res://Pictures/icons/trashIcon.png" id="5_qpemc"]
@@ -22,11 +21,6 @@ shape = SubResource("CircleShape2D_wnvo1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7yp31")
-
-[node name="Barrel" type="Sprite2D" parent="."]
-rotation = 0.7853982
-scale = Vector2(2, 2)
-texture = ExtResource("3_3yu0v")
 
 [node name="SlotDetector" type="Area2D" parent="."]
 collision_mask = 4

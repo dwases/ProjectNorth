@@ -5,8 +5,8 @@ class_name Tower
 
 @onready var menu = $TowerMenu
 @onready var range_circle = $TowerMenu/RangeCircle
-@onready var btn_upgrade = $TowerMenu/UpgradeButton
-@onready var btn_sell = $TowerMenu/DestroyButton
+@onready var btn_upgrade = $TowerMenu/RangeCircle/VBoxContainer/UpgradeButton
+@onready var btn_sell = $TowerMenu/RangeCircle/VBoxContainer2/DestroyButton
 @onready var barrel: Sprite2D = $Barrel
 
 var targets_in_range: Array[Node2D] = []
@@ -15,9 +15,6 @@ func _ready():
 	# Ukrywamy menu na start
 	menu.visible = false
 	
-	# Podłączamy sygnały przycisków
-	btn_upgrade.pressed.connect(_on_upgrade_button_pressed)
-	btn_sell.pressed.connect(_on_destroy_button_pressed)
 	
 	# Inicjalizujemy kółko zasięgu (jeśli statystyki są załadowane)
 	if stats:
@@ -125,10 +122,20 @@ func get_all_targets() -> Array:
 
 
 func _on_upgrade_button_pressed() -> void:
-	print("Kliknięto Upgrade!")
+	upgrade()
 	range_circle.update_circle(stats.Zasieg)
 
 
 func _on_destroy_button_pressed() -> void:
 	print("Sprzedano wieżę")
 	queue_free()
+func upgrade():
+	if stats.level < stats.upgrades.add_cost.size():
+		var upgrade_data = stats.upgrades
+		stats.Attack_speed += upgrade_data.add_attack_speed[stats.level-1]
+		stats.Damage += upgrade_data.add_damage[stats.level-1]
+		stats.Zasieg += upgrade_data.add_range[stats.level-1]
+		stats.level += 1
+		print("Ulepszono na poziom: ", stats.level)
+	else:
+		print("Maksymalny poziom osiągnięty!")
