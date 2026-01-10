@@ -37,7 +37,7 @@ func make_noise() -> void:
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
 	if stats.HP <= 0:
-		get_parent().current_scene.player += stats.money
+		get_tree().current_scene.playerMoney += stats.money
 		get_tree().current_scene.enemyAlive -= 1
 		get_parent().queue_free()
 	
@@ -52,3 +52,4 @@ func interact() -> void:
 	print("Get stunned idiot!")
 	apply_slow(3, 90)
 	
+	stats.speed=0

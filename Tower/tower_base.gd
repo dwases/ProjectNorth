@@ -9,6 +9,9 @@ class_name Tower
 @onready var barrel: Sprite2D = $Barrel
 
 var targets_in_range: Array[Node2D] = []
+@onready var is_snapping: bool = true
+@onready var slot_detector: Area2D = $SlotDetector
+
 
 func _ready():
 	# Ukrywamy menu na start
@@ -20,8 +23,17 @@ func _ready():
 		range_circle.update_circle(stats.Zasieg)
 
 func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		toggle_menu()
+	if not is_snapping:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and GameInstance.is_placing_mode == false:
+			toggle_menu()
+	else:
+		print("Zrobiono klik")
+		if can_be_placed and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			print("Polozono mnie")
+			is_snapping = false
+			GameInstance.is_placing_mode = false
+		pass
+	
 func toggle_menu():
 	menu.visible = not menu.visible
 	
@@ -93,22 +105,36 @@ func hear_enemy(enemy: Node2D):
 	var expire_time = Time.get_ticks_msec() + 1000
 	heard_enemies_timers[enemy] = expire_time
 
-func _process(delta):
-	var current_time = Time.get_ticks_msec()
-	var target = get_best_target()
-	if target and can_shoot:
-		shoot(target)
-	for enemy in heard_enemies_timers.keys():
-		if not is_instance_valid(enemy):
-			heard_enemies_timers.erase(enemy)
-			continue
+var can_be_placed: bool = true
+
+func _process(delta: float) -> void:
+	if is_snapping:
+		can_be_placed = true;
+		global_position = get_global_mouse_position()
+		if slot_detector.has_overlapping_bodies():
+			for area in slot_detector.get_overlapping_bodies():
+				if area == self:
+					continue
+				can_be_placed = false;
+		else:
+			can_be_placed = true
+			pass
+	else: 
+		var current_time = Time.get_ticks_msec()
+		var target = get_best_target()
+		if target and can_shoot:
+			shoot(target)
+		for enemy in heard_enemies_timers.keys():
+			if not is_instance_valid(enemy):
+				heard_enemies_timers.erase(enemy)
+				continue
+				
+			if current_time >= heard_enemies_timers[enemy]:
+				heard_enemies_timers.erase(enemy)
 			
-		if current_time >= heard_enemies_timers[enemy]:
-			heard_enemies_timers.erase(enemy)
-		
-	if get_all_targets().size() > 0:
-		barrel.look_at(get_best_target().global_position)
-		barrel.global_rotation_degrees += 45
+		if get_all_targets().size() > 0:
+			barrel.look_at(get_best_target().global_position)
+			barrel.global_rotation_degrees += 45
 
 func get_all_targets() -> Array:
 	var combined_targets = []
@@ -128,6 +154,7 @@ func _on_upgrade_button_pressed() -> void:
 func _on_destroy_button_pressed() -> void:
 	print("Sprzedano wieżę")
 	queue_free()
+
 func upgrade():
 	if stats.level <= stats.upgrades.add_cost.size():
 		var upgrade_data = stats.upgrades
