@@ -10,9 +10,9 @@ metadata/_custom_type_script = "uid://6rcu3wyrh30q"
 [resource]
 script = ExtResource("1_ay38e")
 HP = 400
-loudness = 12
-speed = 300.0
-stepDistance = 300.0
+loudness = 7
+speed = 250.0
+stepDistance = 150.0
 ability = SubResource("Resource_2s5cl")
 description = "Raz na długi czas rzuca wabik w zasięgu 2000 do przodu na ścieżce"
 metadata/_custom_type_script = "uid://d0ihk500un1ua"
