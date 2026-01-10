@@ -7,6 +7,8 @@ signal start_wave_requested
 @onready var toggle_btn: Button = $ShopWrapper/ToggleButton
 @onready var StartWave_btn: Button = $StartWaveButton
 
+@onready var towerClass = preload("res://Tower/tower_base.tscn")
+
 func _ready():
 	generate_shop_buttons()
 	StartWave_btn.pressed.connect(_on_start_wave_pressed)
@@ -41,6 +43,10 @@ func create_button(stats: TowerStats):
 
 func _on_shop_button_pressed(stats: TowerStats):
 	print("Wybrano wieżę z kosztem: ", stats.BaseCost)
+	#warunek if, wykonac tylko wtedy, kiedy ma sie hajs
+	var tower_spawn = towerClass.instantiate()
+	tower_spawn.stats = stats.duplicate()
+	get_tree().current_scene.add_child(tower_spawn)
 	
 func wave_end():
 	ShowUI()

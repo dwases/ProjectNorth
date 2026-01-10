@@ -9,6 +9,9 @@ class_name Tower
 @onready var barrel: Sprite2D = $Barrel
 
 var targets_in_range: Array[Node2D] = []
+@onready var is_snapping: bool = true
+@onready var slot_detector: Area2D = $SlotDetector
+
 
 func _ready():
 	# Ukrywamy menu na start
@@ -20,8 +23,16 @@ func _ready():
 		range_circle.update_circle(stats.Zasieg)
 
 func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		toggle_menu()
+	if not is_snapping:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			toggle_menu()
+	else:
+		print("Zrobiono klik")
+		if can_be_placed:
+			print("Polozono mnie")
+			is_snapping = false
+		pass
+	
 func toggle_menu():
 	menu.visible = not menu.visible
 	
@@ -93,22 +104,40 @@ func hear_enemy(enemy: Node2D):
 	var expire_time = Time.get_ticks_msec() + 1000
 	heard_enemies_timers[enemy] = expire_time
 
-func _process(delta):
-	var current_time = Time.get_ticks_msec()
-	var target = get_best_target()
-	if target and can_shoot:
-		shoot(target)
-	for enemy in heard_enemies_timers.keys():
-		if not is_instance_valid(enemy):
-			heard_enemies_timers.erase(enemy)
-			continue
+var can_be_placed: bool = true
+
+func _process(delta: float) -> void:
+	if is_snapping:
+		can_be_placed = true;
+		global_position = get_global_mouse_position()
+		if slot_detector.has_overlapping_bodies():
+			for area in slot_detector.get_overlapping_bodies():
+				if area == self:
+					continue
+				can_be_placed = false;
+		else:
+			can_be_placed = true
+			pass
+		if can_be_placed:
+			print("Mozna mnie postawic")
+		else:
+			print("Cos wykrywam")
+	else: 
+		var current_time = Time.get_ticks_msec()
+		var target = get_best_target()
+		if target and can_shoot:
+			shoot(target)
+		for enemy in heard_enemies_timers.keys():
+			if not is_instance_valid(enemy):
+				heard_enemies_timers.erase(enemy)
+				continue
+				
+			if current_time >= heard_enemies_timers[enemy]:
+				heard_enemies_timers.erase(enemy)
 			
-		if current_time >= heard_enemies_timers[enemy]:
-			heard_enemies_timers.erase(enemy)
-		
-	if get_all_targets().size() > 0:
-		barrel.look_at(get_best_target().global_position)
-		barrel.global_rotation_degrees += 45
+		if get_all_targets().size() > 0:
+			barrel.look_at(get_best_target().global_position)
+			barrel.global_rotation_degrees += 45
 
 func get_all_targets() -> Array:
 	var combined_targets = []
