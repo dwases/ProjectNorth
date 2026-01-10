@@ -76,6 +76,7 @@ func _on_shop_button_pressed(stats: TowerStats):
 	#warunek if, wykonac tylko wtedy, kiedy ma sie hajs
 	var tower_spawn = towerClass.instantiate()
 	tower_spawn.stats = stats.duplicate()
+	GameInstance.is_placing_mode = true
 	get_tree().current_scene.add_child(tower_spawn)
 	
 func wave_end():

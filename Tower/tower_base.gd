@@ -24,13 +24,14 @@ func _ready():
 
 func _input_event(viewport, event, shape_idx):
 	if not is_snapping:
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and GameInstance.is_placing_mode == false:
 			toggle_menu()
 	else:
 		print("Zrobiono klik")
-		if can_be_placed:
+		if can_be_placed and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			print("Polozono mnie")
 			is_snapping = false
+			GameInstance.is_placing_mode = false
 		pass
 	
 func toggle_menu():
@@ -118,10 +119,6 @@ func _process(delta: float) -> void:
 		else:
 			can_be_placed = true
 			pass
-		if can_be_placed:
-			print("Mozna mnie postawic")
-		else:
-			print("Cos wykrywam")
 	else: 
 		var current_time = Time.get_ticks_msec()
 		var target = get_best_target()
