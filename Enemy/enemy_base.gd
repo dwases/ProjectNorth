@@ -21,5 +21,5 @@ func initiate(s: float, sd: float, l: int, _hp: int) -> void:
 func make_noise() -> void:
 	if noise_area.has_overlapping_bodies():
 		var TowerArray = noise_area.get_overlapping_bodies()
-		for tower as Tower in TowerArray:
-			tower.hear_enemy()
+		for tower in TowerArray:
+			tower.hear_enemy(self)

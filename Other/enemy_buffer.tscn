@@ -10,3 +10,4 @@ script = ExtResource("1_5vq8w")
 footsprite = ExtResource("2_c4k4f")
 
 [node name="Enemy" parent="." instance=ExtResource("2_lqv4s")]
+unique_name_in_owner = true

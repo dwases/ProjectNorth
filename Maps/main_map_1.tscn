@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=5 format=3 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="PackedScene" uid="uid://b3i4vhql8gbtm" path="res://Other/enemy_buffer.tscn" id="1_m88kv"]
+[ext_resource type="PackedScene" uid="uid://b102jg1fi1ib0" path="res://Tower/tower_base.tscn" id="2_8royk"]
+[ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower.tres" id="3_5jfwi"]
 
 [sub_resource type="Curve2D" id="Curve2D_pmvg8"]
 _data = {
@@ -16,3 +18,9 @@ curve = SubResource("Curve2D_pmvg8")
 [node name="enemybuffer" parent="Path2D" instance=ExtResource("1_m88kv")]
 position = Vector2(100, 100)
 rotation = 1.5707964
+speed = 250.0
+loudness = 2
+
+[node name="Tower" parent="." instance=ExtResource("2_8royk")]
+position = Vector2(483, 428)
+stats = ExtResource("3_5jfwi")

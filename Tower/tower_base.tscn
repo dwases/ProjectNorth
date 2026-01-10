@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b102jg1fi1ib0"]
+[gd_scene load_steps=5 format=3 uid="uid://b102jg1fi1ib0"]
 
 [ext_resource type="Script" uid="uid://gm3q7xkl81ho" path="res://Tower/tower_base.gd" id="1_88ecy"]
+[ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="2_7yp31"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnvo1"]
 
@@ -14,6 +15,7 @@ script = ExtResource("1_88ecy")
 shape = SubResource("CircleShape2D_wnvo1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7yp31")
 
 [node name="SlotDetector" type="Area2D" parent="."]
 collision_mask = 4

@@ -1,7 +1,7 @@
 extends StaticBody2D
 class_name Tower
 
-var stats: TowerStats
+@export var stats: TowerStats
 var targets_in_range: Array[Node2D] = []
 
 func get_best_target() -> Node2D:
@@ -23,8 +23,9 @@ func _process(delta):
 
 func shoot(target):
 	can_shoot = false
-	$ReloadTimer.wait_time = 1.0 / stats.attack_speed 
+	$ReloadTimer.wait_time = 1.0 / stats.Attack_speed 
 	$ReloadTimer.start()
+	print("Strzelam")
 
 func _on_reload_timer_timeout():
 	can_shoot = true
@@ -32,6 +33,6 @@ func _on_reload_timer_timeout():
 func hear_enemy(enemy):
 	if not targets_in_range.has(enemy):
 		targets_in_range.append(enemy)
-	await get_tree().create_timer(1.0).timeout 
+	await get_tree().create_timer(1.1).timeout 
 	if is_instance_valid(enemy) and targets_in_range.has(enemy):
 		targets_in_range.erase(enemy)
