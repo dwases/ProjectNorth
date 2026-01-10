@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=10 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="PackedScene" uid="uid://b102jg1fi1ib0" path="res://Tower/tower_base.tscn" id="2_8royk"]
 [ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower_stats.tres" id="3_5jfwi"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
+[ext_resource type="Shader" uid="uid://7cwe3b3w1ros" path="res://Shaders/Vignette.gdshader" id="5_f6l8i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -78,6 +79,12 @@ _data = {
 }
 point_count = 19
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6cf2"]
+shader = ExtResource("5_f6l8i")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
 [node name="MainMap1" type="Node2D"]
 script = ExtResource("1_3wr7y")
 
@@ -96,3 +103,11 @@ position = Vector2(-84, 143)
 stats = ExtResource("3_5jfwi")
 
 [node name="TimerSpawn" type="Timer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_u6cf2")
+offset_left = -806.0
+offset_top = -456.0
+offset_right = 810.0
+offset_bottom = 457.0
+color = Color(0, 0, 0, 1)
