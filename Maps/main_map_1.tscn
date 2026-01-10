@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
 [ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="5_f6l8i"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="6_u6cf2"]
+[ext_resource type="Shader" uid="uid://7cwe3b3w1ros" path="res://Shaders/Vignette.gdshader" id="5_f6l8i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -79,6 +80,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -864, -272, 0, 0, 0, 0, -464, -272, 0, 0, 0, 0, -464, -112, 0, 0, 0, 0, -592, -112, 0, 0, 0, 0, -592, 48, 0, 0, 0, 0, -496, 48, 0, 0, 0, 0, -496, 240, 0, 0, 0, 0, -144, 240, 0, 0, 0, 0, -144, 304, 0, 0, 0, 0, -48, 304, 0, 0, 0, 0, -48, 240, 0, 0, 0, 0, 464, 240, 0, 0, 0, 0, 464, -208, 0, 0, 0, 0, 80, -208, 0, 0, 0, 0, 80, 16, 0, 0, 0, 0, -208, 16, 0, 0, 0, 0, -208, -144, 0, 0, 0, 0, -112, -144, 0, 0, 0, 0, -112, -512)
 }
 point_count = 19
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6cf2"]
+shader = ExtResource("5_f6l8i")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="MainMap1" type="Node2D"]
 script = ExtResource("1_3wr7y")
