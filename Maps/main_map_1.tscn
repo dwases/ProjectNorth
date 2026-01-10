@@ -18,8 +18,10 @@ curve = SubResource("Curve2D_pmvg8")
 [node name="enemybuffer" parent="Path2D" instance=ExtResource("1_m88kv")]
 position = Vector2(100, 100)
 rotation = 1.5707964
-speed = 250.0
+speed = 100.0
+step_distance = 100.0
 loudness = 2
+hp = 1.0
 
 [node name="Tower" parent="." instance=ExtResource("2_8royk")]
 position = Vector2(483, 428)

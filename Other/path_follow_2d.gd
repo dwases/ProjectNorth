@@ -2,10 +2,11 @@ extends PathFollow2D
 @export var speed: float = 500.0
 @export var step_distance: float = 250.0
 @export var loudness: int = 10
-@export var hp: int = 100
+@export var hp: float = 100
 @export var footsprite: PackedScene
 
-@onready var enemy: Enemy_Class = %Enemy
+@onready var enemy: Enemy_Class = $Enemy
+
 
 var distance_progress: float = 0
 var foot_flag: bool = false
