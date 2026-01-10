@@ -7,7 +7,6 @@ extends PathFollow2D
 
 @onready var enemy: Enemy_Class = $Enemy
 
-
 var distance_progress: float = 0
 var foot_flag: bool = false
 
@@ -15,6 +14,9 @@ func _ready():
 	enemy.initiate(speed,step_distance,loudness,hp)
 
 func _physics_process(delta: float) -> void:
+	if progress_ratio == 1:
+		GameInstance.damage_player(1)
+		get_parent().queue_free()
 	progress += speed * delta
 	distance_progress += speed * delta
 	

@@ -27,7 +27,6 @@ func make_noise() -> void:
 func take_damage(amount: float) -> void:
 	hp -= amount
 	if hp <= 0:
-		print("Wrog nie zyje")
 		get_parent().queue_free()
 	
 	
