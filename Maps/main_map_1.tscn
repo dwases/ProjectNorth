@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=10 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]

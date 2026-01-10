@@ -2,7 +2,7 @@ extends Node
 class_name GI_GameInstace
 
 var playerHP: int = 10
-
+var is_placing_mode: bool = false
 
 var main_camera: Camera2D
 var cameraShakeNoise: FastNoiseLite
