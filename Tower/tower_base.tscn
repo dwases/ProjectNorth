@@ -53,6 +53,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="RangeCircle" type="Node2D" parent="TowerMenu"]
 script = ExtResource("3_hut86")
@@ -67,6 +68,7 @@ offset_right = 16.0
 offset_bottom = -74.369995
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LevelLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer"]
 layout_mode = 2
