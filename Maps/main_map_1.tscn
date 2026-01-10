@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b3i4vhql8gbtm" path="res://Other/enemy_buffer.tscn" id="1_m88kv"]
 [ext_resource type="PackedScene" uid="uid://b102jg1fi1ib0" path="res://Tower/tower_base.tscn" id="2_8royk"]
-[ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower.tres" id="3_5jfwi"]
+[ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower_stats.tres" id="3_5jfwi"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
 
 [sub_resource type="Curve2D" id="Curve2D_pmvg8"]
