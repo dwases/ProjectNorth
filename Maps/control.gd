@@ -10,6 +10,7 @@ signal start_wave_requested
 var is_shop_open: bool = true
 var open_pos_x: float   # Pozycja X, gdy sklep jest widoczny
 var closed_pos_x: float # Pozycja X, gdy sklep jest schowany
+@onready var towerClass = preload("res://Tower/tower_base.tscn")
 
 func _ready():
 	generate_shop_buttons()
@@ -72,6 +73,10 @@ func create_button(stats: TowerStats):
 
 func _on_shop_button_pressed(stats: TowerStats):
 	print("Wybrano wieżę z kosztem: ", stats.BaseCost)
+	#warunek if, wykonac tylko wtedy, kiedy ma sie hajs
+	var tower_spawn = towerClass.instantiate()
+	tower_spawn.stats = stats.duplicate()
+	get_tree().current_scene.add_child(tower_spawn)
 	
 func wave_end():
 	ShowUI()
