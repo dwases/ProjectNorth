@@ -14,9 +14,8 @@ func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
 	circle.radius = stats.loudness * 100
-	
-func _ready() -> void:
 	initial_movement_speed = stats.speed
+	
 
 func _process(delta: float) -> void:
 	if remaining_slow_duration <= 0 and remaining_stun_duration <= 0:
@@ -34,6 +33,7 @@ func make_noise() -> void:
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
 	if stats.HP <= 0:
+		get_tree().current_scene.enemyAlive -= 1
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:

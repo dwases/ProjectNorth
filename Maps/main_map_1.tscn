@@ -106,6 +106,8 @@ stats = ExtResource("3_5jfwi")
 
 [node name="TimerSpawn" type="Timer" parent="."]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.3449418, 0.47932833, 0.72724265, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FullScreen" type="Control" parent="CanvasLayer"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch75basp6e45b"]
+[gd_scene load_steps=6 format=3 uid="uid://ch75basp6e45b"]
 
 [ext_resource type="Script" uid="uid://cd2yau4ft5yin" path="res://Enemy/enemy_base.gd" id="1_0kxy1"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="1_7h4yf"]
+[ext_resource type="Texture2D" uid="uid://dlt56lbyya6ah" path="res://Pictures/light_tex.png" id="3_w4axe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qupb6"]
 radius = 60.133186
@@ -27,3 +28,9 @@ shape = SubResource("CircleShape2D_0kxy1")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("1_7h4yf")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.88431424, 3.200695e-06, 1.1551381e-06, 1)
+energy = 0.6
+texture = ExtResource("3_w4axe")
+texture_scale = 0.5
