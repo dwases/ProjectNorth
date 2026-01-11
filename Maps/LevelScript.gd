@@ -38,6 +38,9 @@ func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	e.stats = base_stats.duplicate(true) as EnemyStats
 	return e
 func _process(delta):
+	if Input.is_action_just_pressed("restart_game"):
+		GameInstance.reset()
+		get_tree().reload_current_scene()
 	if enemyAlive<=0 && isWaveActive:
 		wave_end()
 func _spawn_wave(pattern: Array[EnemyStats],baseDelay: float = 0.5, randTo: float = 1.0) -> void:
