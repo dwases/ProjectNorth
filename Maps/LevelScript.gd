@@ -22,6 +22,7 @@ var playerMoney: int = 0:
 		playerMoney = value
 		game_ui.MoneyLabel.text = str(playerMoney) + "$"
 
+
 @onready var timer_spawn: Timer = $TimerSpawn
 
 func _ready() -> void:
@@ -85,6 +86,12 @@ func start_wave() -> void:
 	print("Sprawdzam Await")
 
 func wave_end():
+	var wave_win_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	wave_win_audio.stream = preload("res://Sounds/winning wave sound.wav")
+	#wave_win_audio.volume_db = -10
+	wave_win_audio.autoplay = true
+	get_tree().current_scene.add_child(wave_win_audio)
+	
 	wave+=1
 	game_ui.wave_end()
 	isWaveActive = false

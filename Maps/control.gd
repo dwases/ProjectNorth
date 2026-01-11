@@ -1,4 +1,5 @@
 extends Control
+class_name Main_UI
 
 @export var resources_path: String = "res://Tower/Resources/"
 signal start_wave_requested
@@ -15,6 +16,7 @@ var closed_pos_x: float # Pozycja X, gdy sklep jest schowany
 @onready var towerClass = preload("res://Tower/tower_base.tscn")
 
 func _ready():
+	GameInstance.full_screen = self
 	generate_shop_buttons()
 	StartWave_btn.pressed.connect(_on_start_wave_pressed)
 	toggle_btn.pressed.connect(toggle_shop)
@@ -77,11 +79,12 @@ func create_button(stats: TowerStats):
 
 func _on_shop_button_pressed(stats: TowerStats):
 	print("Wybrano wieżę z kosztem: ", stats.BaseCost)
-	#warunek if, wykonac tylko wtedy, kiedy ma sie hajs
-	var tower_spawn = towerClass.instantiate()
-	tower_spawn.stats = stats.duplicate()
-	GameInstance.is_placing_mode = true
-	get_tree().current_scene.add_child(tower_spawn)
+	if get_tree().current_scene.playerMoney >= stats.BaseCost:
+		get_tree().current_scene.playerMoney -= stats.BaseCost 
+		var tower_spawn = towerClass.instantiate()
+		tower_spawn.stats = stats.duplicate()
+		GameInstance.is_placing_mode = true
+		get_tree().current_scene.add_child(tower_spawn)
 	
 func wave_end():
 	ShowUI()
@@ -89,11 +92,16 @@ func wave_end():
 
 func ShowUI():
 	StartWave_btn.disabled = false
+	var _buttons = button_container.get_children() as Array[Button]
+	for btn in _buttons:
+		btn.disabled = false
 	
 
 func HideUI():
 	StartWave_btn.disabled = true
-	
+	var _buttons = button_container.get_children() as Array[Button]
+	for btn in _buttons:
+		btn.disabled = true
 
 func _on_start_wave_pressed() -> void:
 	HideUI()

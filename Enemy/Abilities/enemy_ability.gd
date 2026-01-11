@@ -1,5 +1,5 @@
 extends Resource
 class_name EnemyAbility
 
-func initialize_ability():
+func initialize_ability(enemy: Node2D):
 	pass
