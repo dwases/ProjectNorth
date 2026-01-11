@@ -26,6 +26,7 @@ func _input_event(viewport, event, shape_idx):
 	if not is_snapping:
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and GameInstance.is_placing_mode == false:
 			toggle_menu()
+			range_circle.update_circle(stats.Zasieg)
 	else:
 		if can_be_placed and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			is_snapping = false
@@ -47,15 +48,58 @@ func toggle_menu():
 
 func get_best_target() -> Node2D:
 	var all_targets = get_all_targets()
+	
+	# --- KROK 1: CZYSZCZENIE (Sanity Check) ---
+	# Musimy to zrobić PRZED sortowaniem, żeby nie wywalić gry na dostępie do .stats
+	# Iterujemy od tyłu, żeby bezpiecznie usuwać elementy z tablicy
+	for i in range(all_targets.size() - 1, -1, -1):
+		var target = all_targets[i]
+		
+		# Sprawdzamy czy obiekt jest "Freed" (usunięty)
+		if not is_instance_valid(target):
+			# Usuwamy z tablicy lokalnej
+			all_targets.remove_at(i)
+			
+			# Zgodnie z prośbą: Czyścimy też słownik pamięci słuchowej
+			# (Nawet jeśli klucza nie ma, erase jest bezpieczne)
+			heard_enemies_timers.erase(target) 
+			continue
+
+	# Jeśli po czyszczeniu nikogo nie ma, kończymy
 	if all_targets.is_empty():
 		return null
+
+	# --- KROK 2: SORTOWANIE ---
+	# Teraz jest bezpieczne, bo mamy tylko żywych wrogów
 	all_targets.sort_custom(func(a, b):
-		if a.stats.loudness != b.stats.loudness:
-			return a.stats.loudness > b.stats.loudness
-		return a.get_parent().progress > b.get_parent().progress
+		# Safety check: upewnij się, że obiekt ma zmienne
+		var a_loud = a.stats.loudness if "stats" in a and a.stats else 0
+		var b_loud = b.stats.loudness if "stats" in b and b.stats else 0
+		
+		var a_prog = a.get_parent().progress if a.get_parent() is PathFollow2D else 0
+		var b_prog = b.get_parent().progress if b.get_parent() is PathFollow2D else 0
+		
+		if a_loud != b_loud:
+			return a_loud > b_loud
+		return a_prog > b_prog
 	)
 	
-	return all_targets[0]
+	# --- KROK 3: LOGIKA ZAGŁUSZANIA ---
+	var max_loudness = all_targets[0].stats.loudness
+	
+	for target in all_targets:
+		var current_loudness = target.stats.loudness
+		
+		# Jeśli trafiliśmy na kogoś cichszego niż lider, a lider nie był w zasięgu -> przerywamy
+		if current_loudness < max_loudness:
+			return null
+			
+		var dist = global_position.distance_to(target.global_position)
+		
+		if dist <= stats.Zasieg:
+			return target
+			
+	return null
 var can_shoot = true
 
 func shoot(target: Node2D):
@@ -132,12 +176,10 @@ func _process(delta: float) -> void:
 			if not is_instance_valid(enemy):
 				heard_enemies_timers.erase(enemy)
 				continue
-				
 			if current_time >= heard_enemies_timers[enemy]:
 				heard_enemies_timers.erase(enemy)
-			
-		if get_all_targets().size() > 0:
-			barrel.look_at(get_best_target().global_position)
+		if target and is_instance_valid(target):
+			barrel.look_at(target.global_position)
 			barrel.global_rotation_degrees += 45
 
 func get_all_targets() -> Array:
