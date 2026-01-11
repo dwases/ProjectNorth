@@ -36,7 +36,7 @@ func _on_ui_request_wave():
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	var e := enemyScene.instantiate() as Enemy_Buffer
 	e.stats = base_stats.duplicate(true) as EnemyStats
-	
+	enemyAlive += 1
 	return e
 func _process(delta):
 	if Input.is_action_just_pressed("restart_game"):
