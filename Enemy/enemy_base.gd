@@ -15,15 +15,13 @@ var remaining_slow_duration: float
 var HP: float=10
 func _ready() -> void:
 	HP = float(stats.Base_HP)*pow(1.2, get_tree().current_scene.wave-1)
+	$SpriteSoundwave.scale = Vector2(0.2,0.2)
+	
 var remaining_soundwave_duration: float
 
 var can_interact: bool = false
 
-func _ready() -> void:
-	$SpriteSoundwave.scale = Vector2(0.2,0.2)
-	
-	
-	
+
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
@@ -47,17 +45,11 @@ func initiate(_stats) -> void:
 	
 
 func _process(delta: float) -> void:
-	if remaining_slow_duration <= 0 and remaining_stun_duration <= 0:
+	if remaining_slow_duration <= Time.get_ticks_msec():
 		stats.speed = initial_movement_speed
 		active_tags.erase("frozen")
-	remaining_slow_duration = remaining_slow_duration - delta
-	remaining_stun_duration = remaining_slow_duration - delta
-	
-	if remaining_soundwave_duration > 0:
-		remaining_soundwave_duration -= delta
-	else:
-		sprite_soundwave.visible = false
-	
+		owner.stats.speed = stats.speed
+
 
 func make_noise() -> void:
 	if noise_area.has_overlapping_bodies():
@@ -92,8 +84,10 @@ func take_damage(amount: float) -> void:
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:
-	remaining_slow_duration = duration
+	remaining_slow_duration = Time.get_ticks_msec() + duration*1000
 	stats.speed = stats.speed * (1.0 - (slow_percentage/100.0))
+	print(stats.speed)
+	owner.stats.speed = stats.speed
 	active_tags["frozen"] = true
 
 func apply_stun(duration: float) -> void:
