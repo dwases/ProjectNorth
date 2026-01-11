@@ -29,6 +29,8 @@ func make_noise() -> void:
 		var TowerArray = noise_area.get_overlapping_bodies()
 		for tower in TowerArray:
 			tower.hear_enemy(self)
+	
+	
 
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
