@@ -12,6 +12,8 @@ metadata/_custom_type_script = "uid://w0ayw63ir38y"
 
 [resource]
 script = ExtResource("2_ewjpa")
+name = "Tank Rifle"
+description = "Explosive shells dealing AoE damage"
 tower_texture = ExtResource("4_ewjpa")
 projectile_visual = ExtResource("1_5fsrs")
 Zasieg = 500
