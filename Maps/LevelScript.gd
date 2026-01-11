@@ -60,7 +60,6 @@ func start_wave() -> void:
 				classicStats,
 				classicStats,
 				classicStats,
-				heavyStats
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true
@@ -69,12 +68,11 @@ func start_wave() -> void:
 			var pattern := [
 				classicStats,
 				classicStats,
-				heavyStats,
 				classicStats,
 				classicStats,
 				classicStats,
-				heavyStats,
-				heavyStats
+				classicStats,
+				classicStats,
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true
@@ -83,46 +81,51 @@ func start_wave() -> void:
 			var pattern := [
 				classicStats,
 				classicStats,
-				heavyStats,
-				heavyStats,
 				classicStats,
 				heavyStats,
-				heavyStats,
 				classicStats,
-				vandalStats
+				classicStats,
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true
 			
 		4: 
 			var pattern := [
+				classicStats,
+				vandalStats,
+				classicStats,
+				classicStats,
 				heavyStats,
+				classicStats,
+				classicStats,
+				classicStats,
+				vandalStats
+			] as Array[EnemyStats]
+			await _spawn_wave(pattern)
+			isWaveActive = true
+		5: 
+			var pattern := [
 				heavyStats,
 				classicStats,
 				classicStats,
 				heavyStats,
-				heavyStats,
 				vandalStats,
 				vandalStats,
 				vandalStats,
 				classicStats,
 				heavyStats,
 				classicStats,
-				heavyStats,
-				heavyStats,
 				vandalStats,
 				vandalStats,
-				heavyStats,
 				classicStats,
 				vandalStats
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern,0.5,0.5)
 			isWaveActive = true
 			
-		5:
+		6:
 			var pattern := [
 				heavyStats,
-				heavyStats,
 				classicStats,
 				classicStats,
 				classicStats,
@@ -137,7 +140,6 @@ func start_wave() -> void:
 				classicStats,
 				heavyStats,
 				classicStats,
-				heavyStats,
 				heavyStats,
 				vandalStats,
 				vandalStats,
@@ -155,9 +157,6 @@ func start_wave() -> void:
 				heavyStats,
 				heavyStats,
 				heavyStats,
-				heavyStats,
-				heavyStats,
-				heavyStats,
 				vandalStats,
 				vandalStats,
 				heavyStats,
@@ -168,7 +167,7 @@ func start_wave() -> void:
 			await _spawn_wave(pattern,0.2,0.2)
 			isWaveActive = true
 			
-		6:
+		7:
 			var pattern := [
 				heavyStats,
 				heavyStats,
@@ -261,7 +260,7 @@ func start_wave() -> void:
 			await _spawn_wave(pattern,0.1,0.3)
 			isWaveActive = true
 		
-		7:
+		8:
 			var pattern := [
 				majorStats,
 				majorStats,

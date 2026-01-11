@@ -31,6 +31,14 @@ func _physics_process(delta: float) -> void:
 		
 func spawn_footstep():
 	var fs = footsprite.instantiate() as AnimatedSprite2D
+	if stats.loudness == 3:
+		fs.self_modulate = Color(0.0, 1.0, 0.0, 0.8)
+	elif stats.loudness == 4:
+		fs.self_modulate = Color(0.769, 1.0, 0.0, 0.8)
+	elif stats.loudness == 6:
+		fs.self_modulate = Color(0.769, 0.416, 0.0, 0.8)
+	elif stats.loudness == 7:
+		fs.self_modulate = Color(0.495, 0.025, 0.0, 0.8)
 	get_tree().current_scene.add_child(fs)
 	fs.global_position = enemy.global_position
 	fs.global_rotation = enemy.global_rotation + deg_to_rad(90)

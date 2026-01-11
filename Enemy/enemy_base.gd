@@ -5,6 +5,7 @@ class_name Enemy_Class
 
 @onready var NoiseCollider: CollisionShape2D = $NoiseArea/CollisionShape2D
 @onready var noise_area: Area2D = $NoiseArea
+@onready var point_light_2d: PointLight2D = $PointLight2D
 
 var initial_movement_speed: float
 var remaining_stun_duration: float
@@ -15,12 +16,20 @@ var can_interact: bool = false
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
-	circle.radius = stats.loudness * 100
+	circle.radius = stats.loudness * 55
 	initial_movement_speed = stats.speed
 	if stats.ability != null:
 		stats.ability.initialize_ability(self)
 	else:
 		print("Stats are null!")
+	if stats.loudness == 3:
+		point_light_2d.color = Color(0.0, 1.0, 0.0, 0.8)
+	elif stats.loudness == 4:
+		point_light_2d.color = Color(1.0, 1.0, 0.0, 1.0)
+	elif stats.loudness == 6:
+		point_light_2d.color = Color(1.0, 0.498, 0.0, 1.0)
+	elif stats.loudness == 7:
+		point_light_2d.color = Color(0.944, 0.085, 0.0, 1.0)
 	
 
 func _process(delta: float) -> void:
