@@ -164,16 +164,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -248.0
-offset_top = -347.0
+offset_left = -278.0
+offset_top = -431.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
 [node name="ToggleButton" type="Button" parent="CanvasLayer/FullScreen/ShopWrapper"]
 layout_mode = 1
-offset_right = 8.0
-offset_bottom = 8.0
+offset_top = 38.0
+offset_right = 136.0
+offset_bottom = 174.0
 icon = ExtResource("6_u6cf2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FullScreen/ShopWrapper"]
@@ -198,5 +199,54 @@ offset_top = -136.0
 offset_right = 136.0
 grow_vertical = 0
 icon = ExtResource("6_u6cf2")
+
+[node name="StatsWrapper" type="Control" parent="CanvasLayer/FullScreen"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.037
+offset_bottom = -39.96
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/FullScreen/StatsWrapper"]
+custom_minimum_size = Vector2(0, 24.24)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 24.24
+grow_horizontal = 2
+alignment = 1
+
+[node name="MoneyBox" type="ColorRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+color = Color(0.7238164, 0.26485243, 0.22757837, 1)
+
+[node name="MoneyAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/MoneyBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPBox" type="ColorRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+color = Color(0.7238164, 0.26485243, 0.22757837, 1)
+
+[node name="HPAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/FullScreen/StartWaveButton" to="CanvasLayer/FullScreen" method="_on_start_wave_pressed"]

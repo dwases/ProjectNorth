@@ -6,6 +6,8 @@ signal start_wave_requested
 @onready var shop_wrapper: Control = $ShopWrapper
 @onready var toggle_btn: Button = $ShopWrapper/ToggleButton
 @onready var StartWave_btn: Button = $StartWaveButton
+@onready var MoneyLabel: Label = $StatsWrapper/HBoxContainer/MoneyBox/MoneyAmount
+@onready var HPLabel: Label = $StatsWrapper/HBoxContainer/HPBox/HPAmount
 
 var is_shop_open: bool = true
 var open_pos_x: float   # Pozycja X, gdy sklep jest widoczny
@@ -17,6 +19,8 @@ func _ready():
 	StartWave_btn.pressed.connect(_on_start_wave_pressed)
 	toggle_btn.pressed.connect(toggle_shop)
 	call_deferred("setup_animation_positions")
+	HPLabel.text = str(GameInstance.playerHP)
+	GameInstance.player_hp_changed.connect(_on_hp_changed)
 
 func setup_animation_positions():
 	open_pos_x = shop_wrapper.position.x
@@ -67,7 +71,7 @@ func create_button(stats: TowerStats):
 	if stats.tower_texture:
 		btn.icon = stats.tower_texture
 		btn.expand_icon = true
-	btn.custom_minimum_size = Vector2(64, 64)
+	btn.custom_minimum_size = Vector2(128, 128)
 	btn.pressed.connect(func(): _on_shop_button_pressed(stats))
 	button_container.add_child(btn)
 
@@ -95,4 +99,5 @@ func _on_start_wave_pressed() -> void:
 	HideUI()
 	start_wave_requested.emit()
 	
-	
+func _on_hp_changed(new_value: int):
+	HPLabel.text = str(new_value)
