@@ -19,6 +19,8 @@ func initiate(_stats) -> void:
 	initial_movement_speed = stats.speed
 	if stats.ability != null:
 		stats.ability.initialize_ability(self)
+	else:
+		print("Stats are null!")
 	
 
 func _process(delta: float) -> void:
@@ -50,6 +52,6 @@ func apply_stun(duration: float) -> void:
 	
 func interact() -> void:
 	print("Get stunned idiot!")
-	apply_slow(3, 90)
+	apply_slow(3, 100)
 	
 	stats.speed=0
