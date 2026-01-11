@@ -10,15 +10,11 @@ var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
 
-var can_interact: bool = false
-
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
 	circle.radius = stats.loudness * 100
 	initial_movement_speed = stats.speed
-	if stats.ability != null:
-		stats.ability.initialize_ability(self)
 	
 
 func _process(delta: float) -> void:
@@ -38,7 +34,15 @@ func take_damage(amount: float) -> void:
 	stats.HP -= amount
 	if stats.HP <= 0:
 		get_tree().current_scene.playerMoney += stats.money
+		var money_gain_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		money_gain_audio.stream = preload("res://Sounds/gaining money sound.wav")
+		#money_gain_audio.volume_db = -10
+		money_gain_audio.autoplay = true
+		get_tree().current_scene.add_child(money_gain_audio)
+		
 		get_tree().current_scene.enemyAlive -= 1
+		#if get_tree().current_scene.enemyAlive <= 0:
+
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:
@@ -47,9 +51,4 @@ func apply_slow(duration: float, slow_percentage: float) -> void:
 
 func apply_stun(duration: float) -> void:
 	remaining_stun_duration = duration
-	
-func interact() -> void:
-	print("Get stunned idiot!")
-	apply_slow(3, 90)
-	
 	stats.speed=0
