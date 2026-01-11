@@ -51,9 +51,6 @@ func _spawn_wave(pattern: Array[EnemyStats],baseDelay: float = 0.5, randTo: floa
 		timer_spawn.start()
 		await timer_spawn.timeout
 		path_2d.add_child(e)
-		var e1 = e.get_child(0) as Enemy_Class
-		e1.sprite_soundwave.scale *= e1.stats.loudness * 0.2
-		enemyAlive += 1
 	
 
 
@@ -66,6 +63,7 @@ func start_wave() -> void:
 				classicStats,
 				classicStats,
 				classicStats,
+				heavyStats
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true
