@@ -63,18 +63,7 @@ func start_wave() -> void:
 				classicStats,
 				classicStats,
 				classicStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				vandalStats,
-				heavyStats
+				
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true
