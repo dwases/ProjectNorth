@@ -73,6 +73,7 @@ mouse_filter = 2
 
 [node name="LevelLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer"]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="UpgradeButton" type="Button" parent="TowerMenu/RangeCircle/VBoxContainer"]
 layout_mode = 2
@@ -80,6 +81,7 @@ icon = ExtResource("4_qpemc")
 
 [node name="CostLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer"]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="TowerMenu/RangeCircle"]
 anchors_preset = 15
@@ -101,9 +103,11 @@ horizontal_alignment = 1
 [node name="DestroyButton" type="Button" parent="TowerMenu/RangeCircle/VBoxContainer2"]
 layout_mode = 2
 icon = ExtResource("5_qpemc")
+icon_alignment = 1
 
 [node name="Label2" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer2"]
 layout_mode = 2
+horizontal_alignment = 1
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="pressed" from="TowerMenu/RangeCircle/VBoxContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

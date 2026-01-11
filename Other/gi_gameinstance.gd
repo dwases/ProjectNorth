@@ -5,7 +5,6 @@ var playerHP: int = 10:
 	set(value):
 		playerHP = value
 		player_hp_changed.emit(playerHP)
-var is_placing_mode: bool = false
 
 var full_screen: Main_UI
 
