@@ -8,8 +8,8 @@ signal start_wave_requested
 @onready var toggle_btn: Button = $ShopWrapper/ToggleButton
 @onready var StartWave_btn: Button = $StartWaveButton
 @onready var MoneyLabel: Label = $StatsWrapper/HBoxContainer/MoneyBox/MoneyAmount
-@onready var HPLabel: Label = $StatsWrapper/HBoxContainer/HPBox/HPAmount
-@onready var WaveLabel: Label = $StatsWrapper/HBoxContainer/WaveBox/WaveCount
+@onready var HPLabel: Label = $StatsWrapper/HBoxContainer/HPBox/HPHBox/HPAmount
+@onready var WaveLabel: Label = $StatsWrapper/HBoxContainer/WaveBox/WaveHBox/WaveCount
 
 var is_shop_open: bool = true
 var open_pos_x: float   # Pozycja X, gdy sklep jest widoczny
@@ -69,7 +69,7 @@ func generate_shop_buttons():
 func create_button(stats: TowerStats):
 	var btn = Button.new()
 	btn.text = str(stats.BaseCost) + "$"
-	btn.tooltip_text = "Damage: %s\nRange: %s" % [stats.Damage, stats.Zasieg]
+	btn.tooltip_text = "Name: %s\nDescription: %s\nDamage: %s\nAttack Speed: %s\nRange: %s" % [stats.name,stats.description,stats.Damage,stats.Attack_speed, stats.Zasieg]
 	
 	if stats.tower_texture:
 		btn.icon = stats.tower_texture
@@ -87,6 +87,7 @@ func _on_shop_button_pressed(stats: TowerStats):
 		GameInstance.is_placing_mode = true
 		GameInstance.temp_cost = stats.BaseCost
 		get_tree().current_scene.add_child(tower_spawn)
+		tower_spawn.toggle_menu()
 	
 func wave_end(wave_count):
 	ShowUI()

@@ -12,6 +12,8 @@ metadata/_custom_type_script = "uid://deqk652vj8m43"
 
 [resource]
 script = ExtResource("2_v6a7q")
+name = "Frostbite"
+description = "Turret capable of slowing down enemies"
 tower_texture = ExtResource("4_v6a7q")
 projectile_visual = ExtResource("1_g1f3s")
 Zasieg = 400

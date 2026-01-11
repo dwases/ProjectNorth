@@ -12,6 +12,8 @@ metadata/_custom_type_script = "uid://b1a8jr6783iy0"
 
 [resource]
 script = ExtResource("2_kirb6")
+name = "Paraliz"
+description = "Very quick electric tower with low chance of stunning enemy"
 tower_texture = ExtResource("4_kirb6")
 projectile_visual = ExtResource("1_fig5g")
 Zasieg = 500

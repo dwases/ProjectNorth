@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=17 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cpmv20spd5gh5" path="res://Pictures/North_Start.png" id="7_f73gg"]
 [ext_resource type="AudioStream" uid="uid://quoqod2chp4v" path="res://Sounds/NorthCombatMusic.mp3" id="7_tmima"]
 [ext_resource type="Texture2D" uid="uid://cskuqub7mq0t2" path="res://Pictures/North_Upper.png" id="8_42xyt"]
+[ext_resource type="Texture2D" uid="uid://br0xerjpsk3oy" path="res://Pictures/North_Heart.png" id="9_qbvnb"]
+[ext_resource type="Texture2D" uid="uid://dvnottdqlcmu7" path="res://Pictures/North_Skull.png" id="10_7gqju"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -360,33 +362,51 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 texture = ExtResource("8_42xyt")
 
-[node name="HPAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox"]
+[node name="HPHBox" type="HBoxContainer" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="HPAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox/HPHBox"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox/HPHBox"]
+layout_mode = 2
+texture = ExtResource("9_qbvnb")
+stretch_mode = 3
 
 [node name="WaveBox" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 texture = ExtResource("8_42xyt")
 
-[node name="WaveCount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/WaveBox"]
+[node name="WaveHBox" type="HBoxContainer" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/WaveBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="WaveCount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/WaveBox/WaveHBox"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/WaveBox/WaveHBox"]
+layout_mode = 2
+texture = ExtResource("10_7gqju")
+stretch_mode = 3
 
 [node name="BuildingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_3wr7y")
