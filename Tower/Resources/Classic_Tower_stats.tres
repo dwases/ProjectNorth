@@ -14,7 +14,6 @@ metadata/_custom_type_script = "uid://w0ayw63ir38y"
 script = ExtResource("1_hqwc2")
 tower_texture = ExtResource("4_0idgt")
 projectile_visual = ExtResource("1_23356")
-Zasieg = 500
 Attack_speed = 2.0
 Damage = 30.0
 upgrades = ExtResource("4_23356")
