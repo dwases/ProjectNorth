@@ -43,42 +43,23 @@ func toggle_menu():
 	menu.visible = not menu.visible
 	
 	if menu.visible:
-		# Jeśli otwieramy menu, warto odświeżyć promień (np. po upgrade)
 		range_circle.update_circle(stats.Zasieg)
-		
-		# Pro Tip: Tu możesz wysłać sygnał do "GameManagera", 
-		# żeby zamknął menu innych wież (żeby nie mieć otwartych 10 na raz).
 		add_to_group("selected_towers")
 	else:
 		remove_from_group("selected_towers")
 
 func get_best_target() -> Node2D:
 	var all_targets = get_all_targets()
-	
-	# --- KROK 1: CZYSZCZENIE (Sanity Check) ---
-	# Musimy to zrobić PRZED sortowaniem, żeby nie wywalić gry na dostępie do .stats
-	# Iterujemy od tyłu, żeby bezpiecznie usuwać elementy z tablicy
 	for i in range(all_targets.size() - 1, -1, -1):
 		var target = all_targets[i]
-		
-		# Sprawdzamy czy obiekt jest "Freed" (usunięty)
 		if not is_instance_valid(target):
-			# Usuwamy z tablicy lokalnej
 			all_targets.remove_at(i)
-			
-			# Zgodnie z prośbą: Czyścimy też słownik pamięci słuchowej
-			# (Nawet jeśli klucza nie ma, erase jest bezpieczne)
 			heard_enemies_timers.erase(target) 
 			continue
 
-	# Jeśli po czyszczeniu nikogo nie ma, kończymy
 	if all_targets.is_empty():
 		return null
-
-	# --- KROK 2: SORTOWANIE ---
-	# Teraz jest bezpieczne, bo mamy tylko żywych wrogów
 	all_targets.sort_custom(func(a, b):
-		# Safety check: upewnij się, że obiekt ma zmienne
 		var a_loud = a.stats.loudness if "stats" in a and a.stats else 0
 		var b_loud = b.stats.loudness if "stats" in b and b.stats else 0
 		
@@ -89,14 +70,10 @@ func get_best_target() -> Node2D:
 			return a_loud > b_loud
 		return a_prog > b_prog
 	)
-	
-	# --- KROK 3: LOGIKA ZAGŁUSZANIA ---
 	var max_loudness = all_targets[0].stats.loudness
 	
 	for target in all_targets:
 		var current_loudness = target.stats.loudness
-		
-		# Jeśli trafiliśmy na kogoś cichszego niż lider, a lider nie był w zasięgu -> przerywamy
 		if current_loudness < max_loudness:
 			return null
 			

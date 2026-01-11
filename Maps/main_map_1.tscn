@@ -1,12 +1,15 @@
-[gd_scene load_steps=12 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=15 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
+[ext_resource type="Texture2D" uid="uid://1wytlwrvc4t0" path="res://Pictures/North_Button.png" id="5_tmima"]
 [ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="5_u6cf2"]
 [ext_resource type="AudioStream" uid="uid://boopvh86pjkt1" path="res://Sounds/NorthMusic.mp3" id="6_3wr7y"]
-[ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="6_u6cf2"]
+[ext_resource type="Texture2D" uid="uid://856wcapvhyxv" path="res://Pictures/North_Side.png" id="6_f73gg"]
 [ext_resource type="Shader" uid="uid://dqy6lj8i8c5yy" path="res://Shaders/RadialBlur.gdshader" id="7_3wr7y"]
+[ext_resource type="Texture2D" uid="uid://cpmv20spd5gh5" path="res://Pictures/North_Start.png" id="7_f73gg"]
 [ext_resource type="AudioStream" uid="uid://quoqod2chp4v" path="res://Sounds/NorthCombatMusic.mp3" id="7_tmima"]
+[ext_resource type="Texture2D" uid="uid://cskuqub7mq0t2" path="res://Pictures/North_Upper.png" id="8_42xyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -257,8 +260,8 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -279.0
-offset_top = -373.0
+offset_left = -288.0
+offset_top = -416.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -268,24 +271,42 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -68.0
-offset_right = 136.0
-offset_bottom = 68.0
+offset_left = 2.0
+offset_top = -223.0
+offset_right = 74.0
+offset_bottom = -151.0
 grow_vertical = 2
-icon = ExtResource("6_u6cf2")
+rotation = 0.7853982
+theme_override_colors/icon_pressed_color = Color(0.64458877, 0.3209803, 0.12959588, 1)
+theme_override_colors/icon_hover_color = Color(0.8637518, 0.36176988, 0, 1)
+theme_override_icons/icon = ExtResource("5_tmima")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FullScreen/ShopWrapper"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/FullScreen/ShopWrapper"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
+offset_left = -287.0
+offset_top = -270.75
+offset_bottom = 301.25
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("6_f73gg")
+expand_mode = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/FullScreen/ShopWrapper/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FullScreen/ShopWrapper/TextureRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="StartWaveButton" type="Button" parent="CanvasLayer/FullScreen"]
 layout_mode = 1
@@ -295,7 +316,9 @@ anchor_bottom = 1.0
 offset_top = -136.0
 offset_right = 136.0
 grow_vertical = 0
-icon = ExtResource("6_u6cf2")
+theme_override_colors/icon_pressed_color = Color(0.64458877, 0.3209803, 0.12959588, 1)
+theme_override_colors/icon_hover_color = Color(0.8637518, 0.36176988, 0, 1)
+icon = ExtResource("7_f73gg")
 
 [node name="StatsWrapper" type="Control" parent="CanvasLayer/FullScreen"]
 layout_mode = 1
@@ -316,10 +339,10 @@ offset_bottom = 24.24
 grow_horizontal = 2
 alignment = 1
 
-[node name="MoneyBox" type="ColorRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
+[node name="MoneyBox" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-color = Color(0.7238164, 0.26485243, 0.22757837, 1)
+texture = ExtResource("8_42xyt")
 
 [node name="MoneyAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/MoneyBox"]
 layout_mode = 1
@@ -328,13 +351,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HPBox" type="ColorRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
+[node name="HPBox" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-color = Color(0.7238164, 0.26485243, 0.22757837, 1)
+texture = ExtResource("8_42xyt")
 
 [node name="HPAmount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/HPBox"]
 layout_mode = 1
@@ -343,6 +367,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaveBox" type="TextureRect" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("8_42xyt")
+
+[node name="WaveCount" type="Label" parent="CanvasLayer/FullScreen/StatsWrapper/HBoxContainer/WaveBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
