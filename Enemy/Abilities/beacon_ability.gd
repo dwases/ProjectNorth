@@ -11,4 +11,5 @@ func initialize_ability(enemy: Node2D):
 			(enemy as Enemy_Class).make_noise()
 		else:
 			break
-	enemy.queue_free()
+	if enemy:
+		enemy.queue_free()
