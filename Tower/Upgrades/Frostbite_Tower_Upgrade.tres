@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_sg3wb")
-add_cost = Array[int]([250, 500, 750, 1000, 1250, 1500])
-add_damage = Array[float]([5.0, 5.0, 5.0, 10.0, 10.0, 10.0])
-add_range = Array[int]([0, 0, 0, 0, 0, 0])
-add_attack_speed = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+add_cost = Array[int]([150, 500, 750])
+add_damage = Array[float]([5.0, 5.0, 5.0])
+add_range = Array[int]([0, 0, 0])
+add_attack_speed = Array[float]([0.0, 0.0, 0.0])
 metadata/_custom_type_script = "uid://dlafdnkchlgap"

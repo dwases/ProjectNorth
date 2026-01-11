@@ -3,11 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://bbfcvhw3fy1ko" path="res://Tower/sprites/bullet.png" id="1_g1f3s"]
 [ext_resource type="Script" uid="uid://cn784oipgohx" path="res://Tower/Tower_Resource_base.gd" id="2_v6a7q"]
 [ext_resource type="Script" uid="uid://deqk652vj8m43" path="res://Tower/Effects/slow_effect.gd" id="3_v6a7q"]
-[ext_resource type="Resource" uid="uid://c8kxr7f8m085" path="res://Tower/Upgrades/Classic_Tower_Upgrade.tres" id="4_nt5c3"]
 [ext_resource type="Texture2D" uid="uid://b2p7sedrurxiw" path="res://Tower/sprites/frostTurret.png" id="4_v6a7q"]
+[ext_resource type="Resource" uid="uid://ccmq3va4qkol5" path="res://Tower/Upgrades/Frostbite_Tower_Upgrade.tres" id="5_v6a7q"]
 
 [sub_resource type="Resource" id="Resource_uqgj8"]
 script = ExtResource("3_v6a7q")
+slow_percent = 0.6
 metadata/_custom_type_script = "uid://deqk652vj8m43"
 
 [resource]
@@ -20,6 +21,6 @@ Zasieg = 400
 Attack_speed = 1.5
 Damage = 20.0
 BaseCost = 200
-upgrades = ExtResource("4_nt5c3")
+upgrades = ExtResource("5_v6a7q")
 tower_effect = SubResource("Resource_uqgj8")
 metadata/_custom_type_script = "uid://cn784oipgohx"

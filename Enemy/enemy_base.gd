@@ -7,14 +7,15 @@ class_name Enemy_Class
 @onready var noise_area: Area2D = $NoiseArea
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var sprite_soundwave: Sprite2D = $SpriteSoundwave
-
+var active_tags: Dictionary = {}
 
 var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
-
+var HP: float=10
 var can_interact: bool = false
-
+func _ready() -> void:
+	HP = float(stats.Base_HP)*pow(1.2, get_tree().current_scene.wave-1)
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
@@ -39,6 +40,7 @@ func initiate(_stats) -> void:
 func _process(delta: float) -> void:
 	if remaining_slow_duration <= 0 and remaining_stun_duration <= 0:
 		stats.speed = initial_movement_speed
+		active_tags.erase("frozen")
 	remaining_slow_duration = remaining_slow_duration - delta
 	remaining_stun_duration = remaining_slow_duration - delta
 	
@@ -56,8 +58,8 @@ func make_noise() -> void:
 	
 
 func take_damage(amount: float) -> void:
-	stats.HP -= amount
-	if stats.HP <= 0:
+	HP -= amount
+	if HP <= 0:
 		get_tree().current_scene.playerMoney += stats.money
 		var money_gain_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 		money_gain_audio.stream = preload("res://Sounds/gaining money sound.wav")
@@ -73,6 +75,7 @@ func take_damage(amount: float) -> void:
 func apply_slow(duration: float, slow_percentage: float) -> void:
 	remaining_slow_duration = duration
 	stats.speed = stats.speed * (1.0 - (slow_percentage/100.0))
+	active_tags["frozen"] = true
 
 func apply_stun(duration: float) -> void:
 	remaining_stun_duration = duration

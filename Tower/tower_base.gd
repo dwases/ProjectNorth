@@ -17,7 +17,7 @@ func _ready():
 	# Ukrywamy menu na start
 	menu.visible = false
 	barrel.texture = stats.tower_texture
-	
+	stats.BaseCost = stats.upgrades.add_cost[0]
 	# Inicjalizujemy kółko zasięgu (jeśli statystyki są załadowane)
 	if stats:
 		range_circle.update_circle(stats.Zasieg)
@@ -52,6 +52,8 @@ func get_best_target() -> Node2D:
 	var all_targets = get_all_targets()
 	for i in range(all_targets.size() - 1, -1, -1):
 		var target = all_targets[i]
+		if stats.tower_effect and not stats.tower_effect.is_valid_target(target):
+			continue 
 		if not is_instance_valid(target):
 			all_targets.remove_at(i)
 			heard_enemies_timers.erase(target) 
@@ -196,7 +198,7 @@ func _on_destroy_button_pressed() -> void:
 func upgrade():
 	if stats.level <= stats.upgrades.add_cost.size():
 		var upgrade_data = stats.upgrades
-		stats.BaseCost += upgrade_data.add_cost[stats.level-1]
+		stats.BaseCost = upgrade_data.add_cost[stats.level]
 		stats.Attack_speed += upgrade_data.add_attack_speed[stats.level-1]
 		stats.Damage += upgrade_data.add_damage[stats.level-1]
 		stats.Zasieg += upgrade_data.add_range[stats.level-1]

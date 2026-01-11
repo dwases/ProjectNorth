@@ -9,7 +9,6 @@ metadata/_custom_type_script = "uid://6rcu3wyrh30q"
 
 [resource]
 script = ExtResource("1_ay38e")
-HP = 250.0
 loudness = 7
 speed = 250.0
 stepDistance = 150.0
