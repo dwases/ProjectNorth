@@ -5,6 +5,8 @@ class_name Enemy_Class
 
 @onready var NoiseCollider: CollisionShape2D = $NoiseArea/CollisionShape2D
 @onready var noise_area: Area2D = $NoiseArea
+@onready var sprite_soundwave: Sprite2D = $SpriteSoundwave
+
 
 var initial_movement_speed: float
 var remaining_stun_duration: float
@@ -22,6 +24,8 @@ func initiate(_stats) -> void:
 	else:
 		print("Stats are null!")
 	
+	sprite_soundwave.scale *= stats.loudness*1.5
+	
 
 func _process(delta: float) -> void:
 	if remaining_slow_duration <= 0 and remaining_stun_duration <= 0:
@@ -35,6 +39,10 @@ func make_noise() -> void:
 		var TowerArray = noise_area.get_overlapping_bodies()
 		for tower in TowerArray:
 			tower.hear_enemy(self)
+	
+	sprite_soundwave.visible = true
+	await get_tree().create_timer(0.1).timeout
+	sprite_soundwave.visible = false
 	
 	
 
