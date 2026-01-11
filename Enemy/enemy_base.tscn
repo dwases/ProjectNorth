@@ -15,8 +15,8 @@ radius = 132.96616
 resource_local_to_scene = true
 load_path = "res://.godot/imported/WhiteCircle.png-6fcf89566aa5c052329da9a7ccc79ab1.ctex"
 
-[sub_resource type="Animation" id="Animation_qvgeo"]
-resource_name = "soundwave_animation"
+[sub_resource type="Animation" id="Animation_2th3i"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,8 +30,8 @@ tracks/0/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_2th3i"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_qvgeo"]
+resource_name = "soundwave_animation"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

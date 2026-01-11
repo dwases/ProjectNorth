@@ -16,6 +16,11 @@ var remaining_soundwave_duration: float
 
 var can_interact: bool = false
 
+func _ready() -> void:
+	$SpriteSoundwave.scale = Vector2(0.2,0.2)
+	
+	
+	
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
@@ -34,7 +39,7 @@ func initiate(_stats) -> void:
 	elif stats.loudness == 7:
 		point_light_2d.color = Color(0.944, 0.085, 0.0, 1.0)
 	
-	sprite_soundwave.scale *= stats.loudness*0.2
+	#sprite_soundwave.scale *= stats.loudness*0.2
 	
 	
 
@@ -57,16 +62,14 @@ func make_noise() -> void:
 			tower.hear_enemy(self)
 	
 	
-	
-	var tween = create_tween()
-	var sound_wave_time = 0.8 #do przemyślenia czy nie zmienić na zmienną
-	tween.tween_property(sprite_soundwave, "scale", Vector2(stats.loudness*3,stats.loudness*3), sound_wave_time)
-	
+	var t := create_tween()
+	t.tween_property($SpriteSoundwave, "scale", Vector2(stats.loudness*2, stats.loudness*2), 0.3)
+	#
 	remaining_soundwave_duration = 0.3
 	sprite_soundwave.visible = true
-	
-	await tween.finished
-	sprite_soundwave.scale *= stats.loudness*0.2
+	#
+	await t.finished
+	sprite_soundwave.scale = Vector2(0.2,0.2)
 
 
 func take_damage(amount: float) -> void:
