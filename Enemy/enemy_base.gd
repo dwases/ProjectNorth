@@ -15,15 +15,12 @@ var remaining_slow_duration: float
 var HP: float=10
 func _ready() -> void:
 	HP = float(stats.Base_HP)*pow(1.2, get_tree().current_scene.wave-1)
+	$SpriteSoundwave.scale = Vector2(0.2,0.2)
 var remaining_soundwave_duration: float
 
 var can_interact: bool = false
 
-func _ready() -> void:
-	$SpriteSoundwave.scale = Vector2(0.2,0.2)
-	
-	
-	
+
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
