@@ -1,12 +1,13 @@
 extends Node
 class_name GI_GameInstace
+signal player_hp_changed(new_value: int)
+var playerHP: int = 10:
+	set(value):
+		playerHP = value
+		player_hp_changed.emit(playerHP)
+var is_placing_mode: bool = false
 
 var full_screen: Main_UI
-
-
-var playerHP: int = 10
-#var _is_placing_mode: bool = true
-#signal placing_changed(is_placing: bool)
 
 var is_placing_mode: bool:
 	set(value):
@@ -21,6 +22,7 @@ var cameraShakeNoise: FastNoiseLite
 func _ready() -> void:
 	cameraShakeNoise = FastNoiseLite.new()
 	main_camera = get_node("/root/MainMap1/Camera2D")
+	playerHP=10
 
 func damage_player(value: int) -> void:
 	playerHP -= value

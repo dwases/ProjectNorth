@@ -17,7 +17,10 @@ var heavyStats = preload("res://Enemy/Resources/heavy_enemy_stats.tres")
 var majorStats = preload("res://Enemy/Resources/major_enemy_stats.tres")
 var vandalStats = preload("res://Enemy/Resources/vandal_enemy_stats.tres")
 var enemyAlive: int = 0
-var playerMoney: int = 100
+var playerMoney: int = 0:
+	set(value):
+		playerMoney = value
+		game_ui.MoneyLabel.text = str(playerMoney) + "$"
 
 
 @onready var timer_spawn: Timer = $TimerSpawn
@@ -25,6 +28,7 @@ var playerMoney: int = 100
 func _ready() -> void:
 	if game_ui:
 		game_ui.start_wave_requested.connect(_on_ui_request_wave)
+		playerMoney = 100
 func _on_ui_request_wave():
 	start_wave()
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
