@@ -13,11 +13,16 @@ func _ready() -> void:
 
 func damage_player(value: int) -> void:
 	playerHP -= value
-	
+
 	var camera_tween = get_tree().create_tween()
 	camera_tween.tween_method(StartShakingCamera, 5.0, 1.0, 1.0)
 	if playerHP <= 0:
 		print("Gracz nie zyje")
+		var losing_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		losing_audio.stream = preload("res://Sounds/losing sound.wav")
+		#wave_win_audio.volume_db = -10
+		losing_audio.autoplay = true
+		get_tree().current_scene.add_child(losing_audio)
 
 func StartShakingCamera(intensity: float):
 	var cameraOffset = cameraShakeNoise.get_noise_1d(Time.get_ticks_msec()) * intensity

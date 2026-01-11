@@ -61,6 +61,12 @@ func get_best_target() -> Node2D:
 var can_shoot = true
 
 func shoot(target: Node2D):
+	var turret_shot_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	turret_shot_audio.stream = preload("res://Sounds/turret shot sound.wav")
+	#money_gain_audio.volume_db = -10
+	turret_shot_audio.autoplay = true
+	get_tree().current_scene.add_child(turret_shot_audio)
+	
 	can_shoot = false
 	
 	if stats.projectile_visual:
