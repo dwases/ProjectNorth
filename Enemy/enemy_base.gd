@@ -12,6 +12,7 @@ class_name Enemy_Class
 var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
+var remaining_soundwave_duration: float
 
 var can_interact: bool = false
 
@@ -33,7 +34,8 @@ func initiate(_stats) -> void:
 	elif stats.loudness == 7:
 		point_light_2d.color = Color(0.944, 0.085, 0.0, 1.0)
 	
-	sprite_soundwave.scale *= stats.loudness*1.5
+	sprite_soundwave.scale *= stats.loudness*0.2
+	
 	
 
 func _process(delta: float) -> void:
@@ -42,6 +44,11 @@ func _process(delta: float) -> void:
 	remaining_slow_duration = remaining_slow_duration - delta
 	remaining_stun_duration = remaining_slow_duration - delta
 	
+	if remaining_soundwave_duration > 0:
+		remaining_soundwave_duration -= delta
+	else:
+		sprite_soundwave.visible = false
+	
 
 func make_noise() -> void:
 	if noise_area.has_overlapping_bodies():
@@ -49,11 +56,18 @@ func make_noise() -> void:
 		for tower in TowerArray:
 			tower.hear_enemy(self)
 	
+	
+	
+	var tween = create_tween()
+	var sound_wave_time = 0.8 #do przemyślenia czy nie zmienić na zmienną
+	tween.tween_property(sprite_soundwave, "scale", Vector2(stats.loudness*3,stats.loudness*3), sound_wave_time)
+	
+	remaining_soundwave_duration = 0.3
 	sprite_soundwave.visible = true
-	await get_tree().create_timer(0.1).timeout
-	sprite_soundwave.visible = false
 	
-	
+	await tween.finished
+	sprite_soundwave.scale *= stats.loudness*0.2
+
 
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
@@ -67,7 +81,7 @@ func take_damage(amount: float) -> void:
 		
 		get_tree().current_scene.enemyAlive -= 1
 		#if get_tree().current_scene.enemyAlive <= 0:
-
+		
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:

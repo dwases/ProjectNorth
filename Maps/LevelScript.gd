@@ -36,6 +36,7 @@ func _on_ui_request_wave():
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	var e := enemyScene.instantiate() as Enemy_Buffer
 	e.stats = base_stats.duplicate(true) as EnemyStats
+	
 	return e
 func _process(delta):
 	if Input.is_action_just_pressed("restart_game"):
@@ -50,6 +51,8 @@ func _spawn_wave(pattern: Array[EnemyStats],baseDelay: float = 0.5, randTo: floa
 		timer_spawn.start()
 		await timer_spawn.timeout
 		path_2d.add_child(e)
+		var e1 = e.get_child(0) as Enemy_Class
+		e1.sprite_soundwave.scale *= e1.stats.loudness * 0.2
 		enemyAlive += 1
 	
 
