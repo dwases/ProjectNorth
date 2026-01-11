@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://b2pp4k0307glf"]
 
 [ext_resource type="Script" uid="uid://d0ihk500un1ua" path="res://Enemy/Resources/enemy_resource_base.gd" id="1_jhb8l"]
-[ext_resource type="Script" uid="uid://6rcu3wyrh30q" path="res://Enemy/Abilities/enemy_ability.gd" id="1_lvh84"]
+[ext_resource type="Script" uid="uid://qtrv5hhdahpm" path="res://Enemy/Abilities/beacon_ability.gd" id="1_lvh84"]
 
 [sub_resource type="Resource" id="Resource_80ogh"]
 script = ExtResource("1_lvh84")
-metadata/_custom_type_script = "uid://6rcu3wyrh30q"
+metadata/_custom_type_script = "uid://qtrv5hhdahpm"
 
 [resource]
 script = ExtResource("1_jhb8l")

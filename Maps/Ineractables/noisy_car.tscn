@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://x7pjlrnv4yfp"]
+[gd_scene load_steps=5 format=3 uid="uid://x7pjlrnv4yfp"]
 
 [ext_resource type="Script" uid="uid://cb15er7s6jyds" path="res://Maps/Ineractables/noisy_car.gd" id="1_5hs4n"]
 [ext_resource type="Texture2D" uid="uid://b60y31grhrfiu" path="res://Maps/Ineractables/sprites/InteractableCar.png" id="1_hevgb"]
+[ext_resource type="Resource" uid="uid://b2pp4k0307glf" path="res://Enemy/Resources/beacon_enemy_stats.tres" id="2_0vbgi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5hs4n"]
 radius = 30.0
 
 [node name="NoisyCar" type="Node2D"]
 script = ExtResource("1_5hs4n")
+stats = ExtResource("2_0vbgi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hevgb")

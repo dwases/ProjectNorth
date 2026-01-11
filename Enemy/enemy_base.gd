@@ -15,6 +15,10 @@ func initiate(_stats) -> void:
 	var circle = NoiseCollider.shape as CircleShape2D
 	circle.radius = stats.loudness * 100
 	initial_movement_speed = stats.speed
+	if stats.ability != null:
+		stats.ability.initialize_ability(self)
+	else:
+		print("Stats are null!")
 	
 
 func _process(delta: float) -> void:
@@ -53,4 +57,9 @@ func apply_slow(duration: float, slow_percentage: float) -> void:
 
 func apply_stun(duration: float) -> void:
 	remaining_stun_duration = duration
+	
+func interact() -> void:
+	print("Get stunned idiot!")
+	apply_slow(3, 100)
+	
 	stats.speed=0
