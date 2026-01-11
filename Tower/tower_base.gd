@@ -28,9 +28,15 @@ func _input_event(viewport, event, shape_idx):
 			toggle_menu()
 			range_circle.update_circle(stats.Zasieg)
 	else:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			get_tree().current_scene.playerMoney += GameInstance.temp_cost
+			is_snapping = false
+			GameInstance.is_placing_mode = false
+			self.queue_free()
 		if can_be_placed and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			is_snapping = false
 			GameInstance.is_placing_mode = false
+			barrel.self_modulate = Color(1,1,1,1)
 		pass
 	
 func toggle_menu():
@@ -164,9 +170,15 @@ func _process(delta: float) -> void:
 				if area == self:
 					continue
 				can_be_placed = false;
+				
 		else:
 			can_be_placed = true
+			
 			pass
+		if can_be_placed:
+			barrel.self_modulate = Color(0,1,0,0.7)
+		else:
+			barrel.self_modulate = Color(1,0,0,0.7)
 	else: 
 		var current_time = Time.get_ticks_msec()
 		var target = get_best_target()
