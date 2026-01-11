@@ -30,7 +30,7 @@ var playerMoney: int = 0:
 func _ready() -> void:
 	if game_ui:
 		game_ui.start_wave_requested.connect(_on_ui_request_wave)
-		playerMoney = 100
+		playerMoney = 300
 func _on_ui_request_wave():
 	start_wave()
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:

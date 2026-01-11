@@ -1,7 +1,6 @@
 extends Control
 class_name Main_UI
 
-@export var resources_path: String = "res://Tower/Resources/"
 signal start_wave_requested
 @onready var button_container: Container = $ShopWrapper/TextureRect/ScrollContainer/VBoxContainer
 @onready var shop_wrapper: Control = $ShopWrapper
@@ -10,7 +9,7 @@ signal start_wave_requested
 @onready var MoneyLabel: Label = $StatsWrapper/HBoxContainer/MoneyBox/MoneyAmount
 @onready var HPLabel: Label = $StatsWrapper/HBoxContainer/HPBox/HPHBox/HPAmount
 @onready var WaveLabel: Label = $StatsWrapper/HBoxContainer/WaveBox/WaveHBox/WaveCount
-
+@export var Towers: Array[TowerStats] 
 var is_shop_open: bool = true
 var open_pos_x: float   # Pozycja X, gdy sklep jest widoczny
 var closed_pos_x: float # Pozycja X, gdy sklep jest schowany
@@ -51,20 +50,8 @@ func animate_shop(target_x: float):
 	# Animujemy właściwość position:x w czasie 0.4 sekundy
 	tween.tween_property(shop_wrapper, "position:x", target_x, 0.4)
 func generate_shop_buttons():
-	var dir = DirAccess.open(resources_path)
-	
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if (file_name.ends_with(".tres") or file_name.ends_with(".res")):
-				var full_path = resources_path + file_name
-				var tower_stats = load(full_path) as TowerStats
-				if tower_stats:
-					create_button(tower_stats)
-			file_name = dir.get_next()
-	else:
-		print("Błąd: Nie znaleziono ścieżki: " + resources_path)
+	for tower in Towers:
+		create_button(tower)
 
 func create_button(stats: TowerStats):
 	var btn = Button.new()

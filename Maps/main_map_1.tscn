@@ -1,17 +1,23 @@
-[gd_scene load_steps=17 format=4 uid="uid://cmmg28iuolfpn"]
+[gd_scene load_steps=23 format=4 uid="uid://cmmg28iuolfpn"]
 
 [ext_resource type="Script" uid="uid://df0xxfv1rg4bd" path="res://Maps/LevelScript.gd" id="1_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://bkdbvwjk0w1kp" path="res://Pictures/CityTilemap.png" id="4_5hkq0"]
+[ext_resource type="Script" uid="uid://cn784oipgohx" path="res://Tower/Tower_Resource_base.gd" id="5_q1yl2"]
 [ext_resource type="Texture2D" uid="uid://1wytlwrvc4t0" path="res://Pictures/North_Button.png" id="5_tmima"]
 [ext_resource type="Script" uid="uid://cp4yxrljbpfn8" path="res://Maps/control.gd" id="5_u6cf2"]
 [ext_resource type="AudioStream" uid="uid://boopvh86pjkt1" path="res://Sounds/NorthMusic.mp3" id="6_3wr7y"]
+[ext_resource type="Resource" uid="uid://dxk7ua01m4piq" path="res://Tower/Resources/Classic_Tower_stats.tres" id="6_e70yy"]
 [ext_resource type="Texture2D" uid="uid://856wcapvhyxv" path="res://Pictures/North_Side.png" id="6_f73gg"]
 [ext_resource type="Shader" uid="uid://dqy6lj8i8c5yy" path="res://Shaders/RadialBlur.gdshader" id="7_3wr7y"]
 [ext_resource type="Texture2D" uid="uid://cpmv20spd5gh5" path="res://Pictures/North_Start.png" id="7_f73gg"]
+[ext_resource type="Resource" uid="uid://di74irky6t2yj" path="res://Tower/Resources/Frostbite_Tower_stats.tres" id="7_sc0vr"]
 [ext_resource type="AudioStream" uid="uid://quoqod2chp4v" path="res://Sounds/NorthCombatMusic.mp3" id="7_tmima"]
 [ext_resource type="Texture2D" uid="uid://cskuqub7mq0t2" path="res://Pictures/North_Upper.png" id="8_42xyt"]
+[ext_resource type="Resource" uid="uid://bjiy6dso2n03n" path="res://Tower/Resources/Paraliz_Tower_stats.tres" id="8_jdvd8"]
 [ext_resource type="Texture2D" uid="uid://br0xerjpsk3oy" path="res://Pictures/North_Heart.png" id="9_qbvnb"]
+[ext_resource type="Resource" uid="uid://c2y1o4hw5vg8x" path="res://Tower/Resources/Sniper_Tower_stats.tres" id="9_x8c2f"]
 [ext_resource type="Texture2D" uid="uid://dvnottdqlcmu7" path="res://Pictures/North_Skull.png" id="10_7gqju"]
+[ext_resource type="Resource" uid="uid://cdfrrh57uwhhy" path="res://Tower/Resources/Tank_Tower_stats.tres" id="10_r4dli"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6l8i"]
 texture = ExtResource("4_5hkq0")
@@ -254,6 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_u6cf2")
+Towers = Array[ExtResource("5_q1yl2")]([ExtResource("6_e70yy"), ExtResource("7_sc0vr"), ExtResource("8_jdvd8"), ExtResource("9_x8c2f"), ExtResource("10_r4dli")])
 
 [node name="ShopWrapper" type="Control" parent="CanvasLayer/FullScreen"]
 layout_mode = 1
