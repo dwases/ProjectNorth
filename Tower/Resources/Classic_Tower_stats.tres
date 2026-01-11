@@ -12,6 +12,8 @@ metadata/_custom_type_script = "uid://w0ayw63ir38y"
 
 [resource]
 script = ExtResource("1_hqwc2")
+name = "Rifler"
+description = "Mediocre rifle with no special effects"
 tower_texture = ExtResource("4_0idgt")
 projectile_visual = ExtResource("1_23356")
 Attack_speed = 3.0

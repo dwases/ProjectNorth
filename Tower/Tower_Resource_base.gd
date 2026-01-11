@@ -1,6 +1,11 @@
 extends Resource
 class_name TowerStats
 
+@export_group("Info")
+@export var name: String
+@export var description: String
+@export var advanced_description: String
+
 @export_group("Visuals")
 @export var tower_texture: Texture2D
 @export var projectile_visual: Texture2D

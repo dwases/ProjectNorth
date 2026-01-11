@@ -12,6 +12,8 @@ metadata/_custom_type_script = "uid://w0ayw63ir38y"
 
 [resource]
 script = ExtResource("2_ltqod")
+name = "Sniper"
+description = "Bullets deal damage based on distance travelled"
 tower_texture = ExtResource("4_ltqod")
 projectile_visual = ExtResource("1_jxb5v")
 Zasieg = 800
