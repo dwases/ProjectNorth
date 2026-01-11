@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch75basp6e45b"]
+[gd_scene load_steps=12 format=3 uid="uid://ch75basp6e45b"]
 
 [ext_resource type="Script" uid="uid://cd2yau4ft5yin" path="res://Enemy/enemy_base.gd" id="1_0kxy1"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="1_7h4yf"]
 [ext_resource type="Texture2D" uid="uid://dlt56lbyya6ah" path="res://Pictures/light_tex.png" id="3_w4axe"]
+[ext_resource type="Texture2D" uid="uid://bhuobc6hw6s6" path="res://Pictures/North_H_Empty.png" id="4_qvgeo"]
+[ext_resource type="Texture2D" uid="uid://bghurcjahmlc4" path="res://Pictures/North_H_Full.png" id="5_2th3i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qupb6"]
 radius = 60.133186
@@ -82,3 +84,10 @@ texture = SubResource("CompressedTexture2D_w4axe")
 libraries = {
 &"": SubResource("AnimationLibrary_2th3i")
 }
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 3
+texture_under = ExtResource("4_qvgeo")
+texture_progress = ExtResource("5_2th3i")

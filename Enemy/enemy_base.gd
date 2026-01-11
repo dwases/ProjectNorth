@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy_Class
 
 @export var stats: EnemyStats
-
+@onready var hp_bar = $TextureProgressBar
 @onready var NoiseCollider: CollisionShape2D = $NoiseArea/CollisionShape2D
 @onready var noise_area: Area2D = $NoiseArea
 @onready var point_light_2d: PointLight2D = $PointLight2D
@@ -16,6 +16,8 @@ var HP: float=10
 func _ready() -> void:
 	HP = float(stats.Base_HP)*pow(1.2, get_tree().current_scene.wave-1)
 	$SpriteSoundwave.scale = Vector2(0.2,0.2)
+	hp_bar.max_value = int(HP)
+	hp_bar.value = int(HP)
 	
 var remaining_soundwave_duration: float
 
@@ -70,6 +72,7 @@ func make_noise() -> void:
 
 func take_damage(amount: float) -> void:
 	HP -= amount
+	hp_bar.value = int(HP)
 	if HP <= 0:
 		get_tree().current_scene.playerMoney += stats.money
 		var money_gain_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
