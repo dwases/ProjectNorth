@@ -16,7 +16,7 @@ func _draw():
 	level = $"../..".stats.level
 	upgrade_cost = $"../..".stats.BaseCost
 	refund = $"../..".stats.sell_cost
-	$VBoxContainer/LevelLabel.text = str(level)
+	$VBoxContainer/LevelLabel.text = "level " + str(level)
 	if upgrade_cost==0:
 		$VBoxContainer/CostLabel.text = "MAX"
 	else:

@@ -10,8 +10,6 @@ var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
 
-var can_interact: bool = false
-
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
@@ -35,12 +33,22 @@ func make_noise() -> void:
 		var TowerArray = noise_area.get_overlapping_bodies()
 		for tower in TowerArray:
 			tower.hear_enemy(self)
+	
+	
 
 func take_damage(amount: float) -> void:
 	stats.HP -= amount
 	if stats.HP <= 0:
 		get_tree().current_scene.playerMoney += stats.money
+		var money_gain_audio : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		money_gain_audio.stream = preload("res://Sounds/gaining money sound.wav")
+		#money_gain_audio.volume_db = -10
+		money_gain_audio.autoplay = true
+		get_tree().current_scene.add_child(money_gain_audio)
+		
 		get_tree().current_scene.enemyAlive -= 1
+		#if get_tree().current_scene.enemyAlive <= 0:
+
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:

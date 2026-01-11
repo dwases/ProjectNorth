@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ch75basp6e45b" path="res://Enemy/enemy_base.tscn" id="2_lqv4s"]
 [ext_resource type="Script" uid="uid://d0ihk500un1ua" path="res://Enemy/Resources/enemy_resource_base.gd" id="4_c4k4f"]
 
-[sub_resource type="Resource" id="Resource_frx2j"]
+[sub_resource type="Resource" id="Resource_c4k4f"]
 resource_local_to_scene = true
 script = ExtResource("4_c4k4f")
 description = "Zwykły przeciwnik, nic nie robi tylko idzie"
@@ -17,4 +17,4 @@ script = ExtResource("1_5vq8w")
 footsprite = ExtResource("2_c4k4f")
 
 [node name="Enemy" parent="." instance=ExtResource("2_lqv4s")]
-stats = SubResource("Resource_frx2j")
+stats = SubResource("Resource_c4k4f")
