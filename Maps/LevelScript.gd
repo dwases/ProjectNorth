@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var building_audio_player: AudioStreamPlayer2D = $BuildingAudioPlayer
+@onready var combat_audio_stream_player: AudioStreamPlayer2D = $CombatAudioStreamPlayer
 
 @onready var path_2d: Path2D = $Path2D
 @onready var game_ui = $CanvasLayer/FullScreen
@@ -46,6 +48,9 @@ func _spawn_wave(pattern: Array[EnemyStats]) -> void:
 		await timer_spawn.timeout
 		path_2d.add_child(e)
 		enemyAlive += 1
+	
+
+
 
 func start_wave() -> void:
 	match wave:
@@ -95,3 +100,7 @@ func wave_end():
 	wave+=1
 	game_ui.wave_end()
 	isWaveActive = false
+	
+	combat_audio_stream_player.stop()
+	building_audio_player.stop()
+	building_audio_player.play()

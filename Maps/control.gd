@@ -107,5 +107,9 @@ func _on_start_wave_pressed() -> void:
 	HideUI()
 	start_wave_requested.emit()
 	
+	get_tree().current_scene.building_audio_player.stop()
+	get_tree().current_scene.combat_audio_stream_player.stop()
+	get_tree().current_scene.combat_audio_stream_player.play()
+	
 func _on_hp_changed(new_value: int):
 	HPLabel.text = str(new_value)
