@@ -27,9 +27,7 @@ func _input_event(viewport, event, shape_idx):
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and GameInstance.is_placing_mode == false:
 			toggle_menu()
 	else:
-		print("Zrobiono klik")
 		if can_be_placed and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			print("Polozono mnie")
 			is_snapping = false
 			GameInstance.is_placing_mode = false
 		pass
@@ -153,12 +151,15 @@ func get_all_targets() -> Array:
 
 
 func _on_upgrade_button_pressed() -> void:
-	upgrade()
-	range_circle.update_circle(stats.Zasieg)
+	if get_tree().current_scene.playerMoney >= stats.BaseCost:
+		get_tree().current_scene.playerMoney -= stats.sell_cost
+		upgrade()
+		range_circle.update_circle(stats.Zasieg)
 
 
 func _on_destroy_button_pressed() -> void:
 	print("Sprzedano wieżę")
+	get_tree().current_scene.playerMoney += stats.sell_cost
 	queue_free()
 
 func upgrade():

@@ -1,8 +1,19 @@
 extends Node
 class_name GI_GameInstace
 
+var full_screen: Main_UI
+
+
 var playerHP: int = 10
-var is_placing_mode: bool = false
+#var _is_placing_mode: bool = true
+#signal placing_changed(is_placing: bool)
+
+var is_placing_mode: bool:
+	set(value):
+		if value:
+			full_screen.HideUI()
+		else:
+			full_screen.ShowUI()
 
 var main_camera: Camera2D
 var cameraShakeNoise: FastNoiseLite
