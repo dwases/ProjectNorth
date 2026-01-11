@@ -41,3 +41,8 @@ func StartShakingCamera(intensity: float):
 	var cameraOffset = cameraShakeNoise.get_noise_1d(Time.get_ticks_msec()) * intensity
 	main_camera.offset.x = cameraOffset * randf_range(0.9,3.5)
 	main_camera.offset.y = cameraOffset * randf_range(0.9,3.5)
+	
+func reset() -> void:
+	cameraShakeNoise = FastNoiseLite.new()
+	main_camera = get_node("/root/MainMap1/Camera2D")
+	playerHP=10

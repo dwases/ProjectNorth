@@ -36,8 +36,12 @@ func _on_ui_request_wave():
 func _spawn_enemy(base_stats: EnemyStats) -> Enemy_Buffer:
 	var e := enemyScene.instantiate() as Enemy_Buffer
 	e.stats = base_stats.duplicate(true) as EnemyStats
+	
 	return e
 func _process(delta):
+	if Input.is_action_just_pressed("restart_game"):
+		GameInstance.reset()
+		get_tree().reload_current_scene()
 	if enemyAlive<=0 && isWaveActive:
 		wave_end()
 func _spawn_wave(pattern: Array[EnemyStats],baseDelay: float = 0.5, randTo: float = 1.0) -> void:
@@ -47,7 +51,6 @@ func _spawn_wave(pattern: Array[EnemyStats],baseDelay: float = 0.5, randTo: floa
 		timer_spawn.start()
 		await timer_spawn.timeout
 		path_2d.add_child(e)
-		enemyAlive += 1
 	
 
 
@@ -60,6 +63,7 @@ func start_wave() -> void:
 				classicStats,
 				classicStats,
 				classicStats,
+				heavyStats
 			] as Array[EnemyStats]
 			await _spawn_wave(pattern)
 			isWaveActive = true

@@ -13,9 +13,17 @@ var initial_movement_speed: float
 var remaining_stun_duration: float
 var remaining_slow_duration: float
 var HP: float=10
-var can_interact: bool = false
 func _ready() -> void:
 	HP = float(stats.Base_HP)*pow(1.2, get_tree().current_scene.wave-1)
+var remaining_soundwave_duration: float
+
+var can_interact: bool = false
+
+func _ready() -> void:
+	$SpriteSoundwave.scale = Vector2(0.2,0.2)
+	
+	
+	
 func initiate(_stats) -> void:
 	stats = _stats
 	var circle = NoiseCollider.shape as CircleShape2D
@@ -34,7 +42,8 @@ func initiate(_stats) -> void:
 	elif stats.loudness == 7:
 		point_light_2d.color = Color(0.944, 0.085, 0.0, 1.0)
 	
-	sprite_soundwave.scale *= stats.loudness*1.5
+	#sprite_soundwave.scale *= stats.loudness*0.2
+	
 	
 
 func _process(delta: float) -> void:
@@ -44,6 +53,11 @@ func _process(delta: float) -> void:
 	remaining_slow_duration = remaining_slow_duration - delta
 	remaining_stun_duration = remaining_slow_duration - delta
 	
+	if remaining_soundwave_duration > 0:
+		remaining_soundwave_duration -= delta
+	else:
+		sprite_soundwave.visible = false
+	
 
 func make_noise() -> void:
 	if noise_area.has_overlapping_bodies():
@@ -51,11 +65,16 @@ func make_noise() -> void:
 		for tower in TowerArray:
 			tower.hear_enemy(self)
 	
+	
+	var t := create_tween()
+	t.tween_property($SpriteSoundwave, "scale", Vector2(stats.loudness*2, stats.loudness*2), 0.3)
+	#
+	remaining_soundwave_duration = 0.3
 	sprite_soundwave.visible = true
-	await get_tree().create_timer(0.1).timeout
-	sprite_soundwave.visible = false
-	
-	
+	#
+	await t.finished
+	sprite_soundwave.scale = Vector2(0.2,0.2)
+
 
 func take_damage(amount: float) -> void:
 	HP -= amount
@@ -69,7 +88,7 @@ func take_damage(amount: float) -> void:
 		
 		get_tree().current_scene.enemyAlive -= 1
 		#if get_tree().current_scene.enemyAlive <= 0:
-
+		
 		get_parent().queue_free()
 	
 func apply_slow(duration: float, slow_percentage: float) -> void:

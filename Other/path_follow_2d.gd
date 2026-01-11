@@ -40,6 +40,12 @@ func spawn_footstep():
 	elif stats.loudness == 7:
 		fs.self_modulate = Color(0.495, 0.025, 0.0, 0.8)
 	get_tree().current_scene.add_child(fs)
+	
+	if !enemy:
+		fs.queue_free()
+		print("Enemy does not exist anymore, cannot place footstep")
+		return
+	
 	fs.global_position = enemy.global_position
 	fs.global_rotation = enemy.global_rotation + deg_to_rad(90)
 	if foot_flag:

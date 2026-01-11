@@ -7,6 +7,5 @@ class_name SlowEffect
 func is_valid_target(enemy: Node) -> bool:
 	return not enemy.active_tags.has("frozen")
 
-func apply_effect(enemy: Node2D):
 	if enemy.has_method("apply_slow"):
 		enemy.apply_slow(slow_percent, duration)

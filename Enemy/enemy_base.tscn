@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch75basp6e45b"]
+[gd_scene load_steps=10 format=3 uid="uid://ch75basp6e45b"]
 
 [ext_resource type="Script" uid="uid://cd2yau4ft5yin" path="res://Enemy/enemy_base.gd" id="1_0kxy1"]
 [ext_resource type="Texture2D" uid="uid://dit0ylg4bghj8" path="res://icon.svg" id="1_7h4yf"]
-[ext_resource type="Texture2D" uid="uid://cds64nuqdxw6g" path="res://Enemy/sprites/WhiteCircle.png" id="2_qvgeo"]
 [ext_resource type="Texture2D" uid="uid://dlt56lbyya6ah" path="res://Pictures/light_tex.png" id="3_w4axe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qupb6"]
@@ -11,6 +10,46 @@ radius = 60.133186
 [sub_resource type="CircleShape2D" id="CircleShape2D_0kxy1"]
 resource_local_to_scene = true
 radius = 132.96616
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w4axe"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/WhiteCircle.png-6fcf89566aa5c052329da9a7ccc79ab1.ctex"
+
+[sub_resource type="Animation" id="Animation_2th3i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSoundwave:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qvgeo"]
+resource_name = "soundwave_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSoundwave:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2th3i"]
+_data = {
+&"RESET": SubResource("Animation_2th3i"),
+&"soundwave_animation": SubResource("Animation_qvgeo")
+}
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -37,5 +76,9 @@ texture = ExtResource("3_w4axe")
 texture_scale = 0.5
 
 [node name="SpriteSoundwave" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_qvgeo")
+texture = SubResource("CompressedTexture2D_w4axe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2th3i")
+}
