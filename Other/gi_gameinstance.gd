@@ -1,5 +1,8 @@
 extends Node
 class_name GI_GameInstace
+
+const GAME_OVER = preload("uid://baigtg321ow0t")
+
 signal player_hp_changed(new_value: int)
 var playerHP: int = 10:
 	set(value):
@@ -36,6 +39,12 @@ func damage_player(value: int) -> void:
 		#wave_win_audio.volume_db = -10
 		losing_audio.autoplay = true
 		get_tree().current_scene.add_child(losing_audio)
+		
+		var go = GAME_OVER.instantiate()
+		go.global_position = get_tree().current_scene.get_node("Camera2D").global_position
+		get_tree().current_scene.add_child(go)
+		
+		#change_scene_to_file("res://Maps/game_over.tscn")
 
 func StartShakingCamera(intensity: float):
 	var cameraOffset = cameraShakeNoise.get_noise_1d(Time.get_ticks_msec()) * intensity
