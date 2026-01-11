@@ -143,7 +143,7 @@ func apply_hit_logic(target: Node2D):
 		target.take_damage(stats.Damage)
 		
 	if stats.tower_effect:
-		stats.tower_effect.apply_effect(target)
+		stats.tower_effect.apply_effect(target, self)
 
 func _on_reload_timer_timeout():
 	can_shoot = true
