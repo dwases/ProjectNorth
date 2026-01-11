@@ -3,12 +3,13 @@ class_name Main_UI
 
 @export var resources_path: String = "res://Tower/Resources/"
 signal start_wave_requested
-@onready var button_container: Container = $ShopWrapper/VBoxContainer
+@onready var button_container: Container = $ShopWrapper/TextureRect/ScrollContainer/VBoxContainer
 @onready var shop_wrapper: Control = $ShopWrapper
 @onready var toggle_btn: Button = $ShopWrapper/ToggleButton
 @onready var StartWave_btn: Button = $StartWaveButton
 @onready var MoneyLabel: Label = $StatsWrapper/HBoxContainer/MoneyBox/MoneyAmount
 @onready var HPLabel: Label = $StatsWrapper/HBoxContainer/HPBox/HPAmount
+@onready var WaveLabel: Label = $StatsWrapper/HBoxContainer/WaveBox/WaveCount
 
 var is_shop_open: bool = true
 var open_pos_x: float   # Pozycja X, gdy sklep jest widoczny
@@ -26,7 +27,7 @@ func _ready():
 
 func setup_animation_positions():
 	open_pos_x = shop_wrapper.position.x
-	closed_pos_x = open_pos_x + shop_wrapper.size.x - toggle_btn.size.x
+	closed_pos_x = open_pos_x + shop_wrapper.size.x #- toggle_btn.size.x
 	toggle_btn.text = ">"
 func toggle_shop():
 	if is_shop_open:
@@ -86,9 +87,9 @@ func _on_shop_button_pressed(stats: TowerStats):
 		GameInstance.is_placing_mode = true
 		get_tree().current_scene.add_child(tower_spawn)
 	
-func wave_end():
+func wave_end(wave_count):
 	ShowUI()
-
+	WaveLabel.text = str(wave_count)
 
 func ShowUI():
 	StartWave_btn.disabled = false
@@ -106,7 +107,6 @@ func HideUI():
 func _on_start_wave_pressed() -> void:
 	HideUI()
 	start_wave_requested.emit()
-	
 	get_tree().current_scene.building_audio_player.stop()
 	get_tree().current_scene.combat_audio_stream_player.stop()
 	get_tree().current_scene.combat_audio_stream_player.play()

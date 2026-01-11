@@ -98,7 +98,7 @@ func wave_end():
 	get_tree().current_scene.add_child(wave_win_audio)
 	
 	wave+=1
-	game_ui.wave_end()
+	game_ui.wave_end(wave)
 	isWaveActive = false
 	
 	combat_audio_stream_player.stop()
