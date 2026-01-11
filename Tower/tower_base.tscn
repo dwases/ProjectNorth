@@ -7,11 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://br1pggqdpgtwe" path="res://Pictures/icons/upgradeIcon.png" id="4_qpemc"]
 [ext_resource type="Texture2D" uid="uid://8amfpqqboe2t" path="res://Pictures/icons/trashIcon.png" id="5_qpemc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wnvo1"]
-radius = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5fmu"]
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yu0v"]
-size = Vector2(32, 32)
+size = Vector2(30, 30)
 
 [node name="Tower" type="StaticBody2D"]
 collision_mask = 0
@@ -19,7 +19,7 @@ input_pickable = true
 script = ExtResource("1_88ecy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wnvo1")
+shape = SubResource("RectangleShape2D_a5fmu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)

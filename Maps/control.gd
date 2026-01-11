@@ -84,6 +84,7 @@ func _on_shop_button_pressed(stats: TowerStats):
 		var tower_spawn = towerClass.instantiate()
 		tower_spawn.stats = stats.duplicate()
 		GameInstance.is_placing_mode = true
+		GameInstance.temp_cost = stats.BaseCost
 		get_tree().current_scene.add_child(tower_spawn)
 	
 func wave_end():
