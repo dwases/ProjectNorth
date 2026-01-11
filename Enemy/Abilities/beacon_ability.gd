@@ -12,7 +12,3 @@ func initialize_ability(enemy: Node2D):
 		else:
 			break
 	enemy.queue_free()
-
-func interact(otherObj: Node2D):
-	if otherObj.has_method("interact"):
-		otherObj.interact()

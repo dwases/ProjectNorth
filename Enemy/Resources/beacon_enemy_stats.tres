@@ -12,6 +12,6 @@ script = ExtResource("1_jhb8l")
 HP = 5000
 loudness = 15
 speed = 0.0
-stepDistance = 1.0
+stepDistance = 10000.0
 ability = SubResource("Resource_80ogh")
 metadata/_custom_type_script = "uid://d0ihk500un1ua"
