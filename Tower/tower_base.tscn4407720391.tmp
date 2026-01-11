@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://b102jg1fi1ib0"]
+
+[ext_resource type="Script" uid="uid://gm3q7xkl81ho" path="res://Tower/tower_base.gd" id="1_88ecy"]
+[ext_resource type="Texture2D" uid="uid://ct2pfj2gifeh3" path="res://Tower/sprites/turretBase.png" id="2_3yu0v"]
+[ext_resource type="Texture2D" uid="uid://dlt56lbyya6ah" path="res://Pictures/light_tex.png" id="3_3yu0v"]
+[ext_resource type="Script" uid="uid://vp7jx4ic4o8h" path="res://Tower/DrawCircle.gd" id="3_hut86"]
+[ext_resource type="Texture2D" uid="uid://br1pggqdpgtwe" path="res://Pictures/icons/upgradeIcon.png" id="4_qpemc"]
+[ext_resource type="Texture2D" uid="uid://8amfpqqboe2t" path="res://Pictures/icons/trashIcon.png" id="5_qpemc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnvo1"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yu0v"]
+size = Vector2(32, 32)
+
+[node name="Tower" type="StaticBody2D"]
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_88ecy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wnvo1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_3yu0v")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+rotation = 0.7853982
+scale = Vector2(2, 2)
+
+[node name="SlotDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlotDetector"]
+shape = SubResource("RectangleShape2D_3yu0v")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+rotation = 0.7853982
+scale = Vector2(1.9999999, 1.9999999)
+color = Color(1, 1, 1, 0.78431374)
+energy = 0.3
+texture = ExtResource("3_3yu0v")
+texture_scale = 0.8
+height = 1.0
+
+[node name="TowerMenu" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="RangeCircle" type="Node2D" parent="TowerMenu"]
+script = ExtResource("3_hut86")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TowerMenu/RangeCircle"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -160.37
+offset_right = 16.0
+offset_bottom = -74.369995
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LevelLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="TowerMenu/RangeCircle/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_qpemc")
+
+[node name="CostLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TowerMenu/RangeCircle"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = 68.1
+offset_right = 16.0
+offset_bottom = 154.10007
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="DeleteLabel" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer2"]
+layout_mode = 2
+text = "Delete"
+horizontal_alignment = 1
+
+[node name="DestroyButton" type="Button" parent="TowerMenu/RangeCircle/VBoxContainer2"]
+layout_mode = 2
+icon = ExtResource("5_qpemc")
+icon_alignment = 1
+
+[node name="Label2" type="Label" parent="TowerMenu/RangeCircle/VBoxContainer2"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="pressed" from="TowerMenu/RangeCircle/VBoxContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="TowerMenu/RangeCircle/VBoxContainer2/DestroyButton" to="." method="_on_destroy_button_pressed"]
